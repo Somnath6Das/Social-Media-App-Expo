@@ -1,4 +1,3 @@
-// components/ThemeProvider.tsx
 import React from "react";
 import { useThemeStore } from "./themeStore";
 import { getTheme } from "./theme";

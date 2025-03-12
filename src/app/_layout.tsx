@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 import { ThemeProvider } from "../theme/ThemeProvider";
 import { useTheme } from "../theme/ThemeProvider";
 
-export default function Layout() {
+export default function RootLayout() {
   const theme = useTheme();
   return (
     <ThemeProvider>
