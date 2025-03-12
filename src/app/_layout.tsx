@@ -1,19 +1,21 @@
 import { Stack } from "expo-router";
-import { useThemeStore } from "./../global/theme";
+import { ThemeProvider } from "../theme/ThemeProvider";
+import { useTheme } from "../theme/ThemeProvider";
 
 export default function Layout() {
-  const { theme } = useThemeStore();
-
+  const theme = useTheme();
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: {
-          backgroundColor: theme === "dark" ? "black" : "white",
-        },
-      }}
-    >
-      <Stack.Screen name="index" />
-    </Stack>
+    <ThemeProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: theme.background,
+          },
+        }}
+      >
+        <Stack.Screen name="index" />
+      </Stack>
+    </ThemeProvider>
   );
 }

@@ -1,0 +1,18 @@
+interface ThemeState {
+// ... existing properties
+customTheme: Partial<typeof lightTheme>;
+setCustomTheme: (custom: Partial<typeof lightTheme>) => void;
+}
+
+const MyComponent = () => {
+const theme = useTheme();
+const { theme: currentTheme, setTheme } = useThemeStore();
+
+return (
+<View style={{ backgroundColor: theme.background }}>
+<Text style={{ color: theme.text }}>
+Current theme: {currentTheme}
+</Text>
+</View>
+);
+};
