@@ -1,31 +1,23 @@
 import { useState } from "react";
-import { Button, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import InputField from "~/src/components/InputField";
-import { useTheme } from "~/src/theme/ThemeProvider";
 
-export default function Login() {
-  const theme = useTheme();
+export default function Home() {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-      }}
-    >
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
         contentContainerStyle={{
+          flex: 1,
           justifyContent: "center",
-          alignItems: "center",
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
+        <View style={{ width: "100%", alignItems: "center", gap: 90 }}>
           <InputField
             title="Email"
             value={form.email}
@@ -33,7 +25,6 @@ export default function Login() {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             keyboardType="email-address"
           />
-
           <InputField
             title="Password"
             value={form.password}

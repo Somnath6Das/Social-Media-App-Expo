@@ -23,16 +23,14 @@ const InputField = ({
   return (
     <View
       style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "black",
+        height: 20,
+        width: "90%",
+        gap: 10,
       }}
     >
       <Text
         style={{
-          alignSelf: "baseline",
-          color: "#F5F5F5",
+          color: "black",
           fontSize: 20,
         }}
       >
@@ -41,22 +39,21 @@ const InputField = ({
 
       <View
         style={{
-          flex: 1,
           flexDirection: "row",
           width: "100%",
           height: 64,
+          justifyContent: "space-between",
           paddingHorizontal: 16,
-          backgroundColor: "#000000",
+          backgroundColor: "#ffffff",
           borderColor: "#FFC300",
-          borderWidth: 2,
+          borderWidth: 3,
           paddingVertical: 10,
           borderRadius: 10,
         }}
       >
         <TextInput
           style={{
-            flex: 1,
-            color: "white",
+            color: "black",
             textAlignVertical: "center",
           }}
           value={value}
