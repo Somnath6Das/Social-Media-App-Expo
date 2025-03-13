@@ -1,0 +1,91 @@
+import { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+
+import { KeyboardTypeOptions } from "react-native";
+
+type FormField = {
+  title: string;
+  value: string;
+  placeholder: string;
+  handleChangeText: (text: string) => void;
+  keyboardType: KeyboardTypeOptions;
+};
+
+const InputField = ({
+  title,
+  value,
+  placeholder,
+  handleChangeText,
+  keyboardType,
+}: FormField) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "black",
+      }}
+    >
+      <Text
+        style={{
+          alignSelf: "baseline",
+          color: "#F5F5F5",
+          fontSize: 20,
+        }}
+      >
+        {title}
+      </Text>
+
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          width: "100%",
+          height: 64,
+          paddingHorizontal: 16,
+          backgroundColor: "#000000",
+          borderColor: "#FFC300",
+          borderWidth: 2,
+          paddingVertical: 10,
+          borderRadius: 10,
+        }}
+      >
+        <TextInput
+          style={{
+            flex: 1,
+            color: "white",
+            textAlignVertical: "center",
+          }}
+          value={value}
+          placeholder={placeholder}
+          placeholderTextColor="#7B7B8B"
+          onChangeText={handleChangeText}
+          secureTextEntry={title === "Password" && !showPassword}
+          keyboardType={keyboardType}
+        />
+
+        {title === "Password" && (
+          <TouchableOpacity
+            style={{ justifyContent: "center" }}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <Image
+              source={
+                !showPassword
+                  ? require("~/assets/photos/eye.png")
+                  : require("~/assets/photos/eye-hide.png")
+              }
+              style={{ width: 24, height: 24 }}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        )}
+      </View>
+    </View>
+  );
+};
+
+export default InputField;
