@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "~/src/components/CustomButton";
 import InputField from "~/src/components/InputField";
 
 export default function SetPassword() {
@@ -32,6 +33,7 @@ export default function SetPassword() {
             handleChangeText={(e) => setPass({ ...pass, confirmPassword: e })}
             keyboardType="default"
           />
+          <CustomButton title="Sign up" />
         </View>
       </ScrollView>
     </SafeAreaView>

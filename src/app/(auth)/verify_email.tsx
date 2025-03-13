@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "~/src/components/CustomButton";
 import InputField from "~/src/components/InputField";
 
 export default function VerifyEmail() {
@@ -11,18 +12,19 @@ export default function VerifyEmail() {
         contentContainerStyle={{
           flex: 1,
           justifyContent: "center",
-          width: "100%",
-          alignItems: "center",
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <InputField
-          title="Email"
-          value={email}
-          placeholder="example@email.com"
-          handleChangeText={(e) => setEmail(e)}
-          keyboardType="email-address"
-        />
+        <View style={{ width: "100%", alignItems: "center", gap: 90 }}>
+          <InputField
+            title="Email"
+            value={email}
+            placeholder="example@email.com"
+            handleChangeText={(e) => setEmail(e)}
+            keyboardType="email-address"
+          />
+          <CustomButton title="Sign up" />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

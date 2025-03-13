@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "~/src/components/CustomButton";
 import InputField from "~/src/components/InputField";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
     email: "",
     password: "",
   });
+  const signInWithEmail = () => {};
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
@@ -32,6 +34,7 @@ export default function Home() {
             handleChangeText={(e) => setForm({ ...form, password: e })}
             keyboardType="default"
           />
+          <CustomButton title="Sign in" onPress={() => signInWithEmail()} />
         </View>
       </ScrollView>
     </SafeAreaView>
