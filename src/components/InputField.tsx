@@ -55,6 +55,8 @@ const InputField = ({
           style={{
             color: "black",
             textAlignVertical: "center",
+            fontSize: 18,
+            height: 35,
           }}
           value={value}
           placeholder={placeholder}
