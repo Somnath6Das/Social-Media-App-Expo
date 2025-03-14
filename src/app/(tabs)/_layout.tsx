@@ -7,6 +7,9 @@ export default function Layout() {
       screenOptions={{
         tabBarShowLabel: false,
         headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+        },
       }}
     >
       <Tabs.Screen

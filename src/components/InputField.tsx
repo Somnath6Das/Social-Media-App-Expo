@@ -25,13 +25,13 @@ const InputField = ({
       style={{
         height: 20,
         width: "90%",
-        gap: 10,
+        gap: 7,
       }}
     >
       <Text
         style={{
           color: "black",
-          fontSize: 20,
+          fontSize: 18,
         }}
       >
         {title}
