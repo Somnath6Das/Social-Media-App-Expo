@@ -1,9 +1,15 @@
-import { Stack } from "expo-router";
+import { Redirect, Stack } from "expo-router";
+import { useAuth } from "~/src/global/useAuth";
 
 import { useTheme } from "~/src/theme/ThemeProvider";
+import { AuthContextType } from "~/src/types";
 
 export default function Layout() {
   const theme = useTheme();
+  const { auth, updateAuth } = useAuth() as AuthContextType;
+  if (auth.isAuthenticated) {
+    return <Redirect href="/(tabs)" />;
+  }
   return (
     <Stack
       screenOptions={{

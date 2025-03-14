@@ -6,6 +6,7 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
+  ActivityIndicator,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -78,7 +79,12 @@ export default function Home() {
             handleChangeText={(e) => setForm({ ...form, password: e })}
             keyboardType="default"
           />
-          <CustomButton title="Sign in" onPress={() => signInWithEmail()} />
+
+          <CustomButton
+            title="Sign in"
+            loading={loading}
+            onPress={() => signInWithEmail()}
+          />
         </View>
         <View
           style={{

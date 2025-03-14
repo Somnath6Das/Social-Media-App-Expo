@@ -1,7 +1,16 @@
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
+import { useAuth } from "~/src/global/useAuth";
+import { useTheme } from "~/src/theme/ThemeProvider";
+import { AuthContextType } from "~/src/types";
 
 export default function Layout() {
+  const theme = useTheme();
+  const { auth, updateAuth } = useAuth() as AuthContextType;
+
+  if (!auth.isAuthenticated) {
+    return <Redirect href="/(auth)" />;
+  }
   return (
     <Tabs
       screenOptions={{

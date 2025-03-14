@@ -1,14 +1,16 @@
-import { Pressable, Text } from "react-native";
+import { ActivityIndicator, Pressable, Text } from "react-native";
 
 type ButtonProps = {
   title: string;
   onPress?: () => void;
+  loading: boolean;
 };
 
-export default function CustomButton({ title, onPress }: ButtonProps) {
+export default function CustomButton({ title, onPress, loading }: ButtonProps) {
   return (
     <Pressable
       onPress={onPress}
+      disabled={loading}
       style={{
         backgroundColor: "#FFC300",
         marginTop: 10,
@@ -17,7 +19,15 @@ export default function CustomButton({ title, onPress }: ButtonProps) {
         borderRadius: 5,
       }}
     >
-      <Text style={{ alignSelf: "center", fontSize: 18 }}>{title}</Text>
+      {loading ? (
+        <ActivityIndicator
+          size="small"
+          color="white"
+          style={{ alignSelf: "center" }}
+        />
+      ) : (
+        <Text style={{ alignSelf: "center", fontSize: 18 }}>{title}</Text>
+      )}
     </Pressable>
   );
 }
