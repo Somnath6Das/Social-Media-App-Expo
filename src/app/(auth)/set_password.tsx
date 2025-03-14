@@ -1,14 +1,49 @@
 import { useState } from "react";
-import { Image, ScrollView, View } from "react-native";
+import { Alert, Image, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "~/src/components/CustomButton";
 import InputField from "~/src/components/InputField";
+import { useEmail } from "~/src/global/useEmail";
+import { supabase } from "~/src/lib/superbase";
+import { EmailType } from "~/src/types";
 
 export default function SetPassword() {
+  const { email, otp } = useEmail() as EmailType;
+  const [loading, setLoading] = useState(false);
   const [pass, setPass] = useState({
     passWord: "",
     confirmPassword: "",
   });
+  const setPassword = async () => {
+    if (!pass.passWord && !pass.confirmPassword) {
+      Alert.alert("Please set Password and Corfirm!");
+      return;
+    }
+    if (pass.passWord !== pass.confirmPassword) {
+      Alert.alert("Password and corfirm is not match!");
+      return;
+    }
+    setLoading(true);
+    const { data, error } = await supabase.auth.verifyOtp({
+      email,
+      token: otp,
+      type: "email",
+    });
+
+    if (error) {
+      Alert.alert(error?.message);
+      return;
+    }
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: pass.passWord,
+    });
+
+    if (updateError) {
+      Alert.alert(updateError?.message);
+      return;
+    }
+    setLoading(false);
+  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
@@ -43,7 +78,11 @@ export default function SetPassword() {
             handleChangeText={(e) => setPass({ ...pass, confirmPassword: e })}
             keyboardType="default"
           />
-          <CustomButton title="Sign up" />
+          <CustomButton
+            loading={loading}
+            title="Sign up"
+            onPress={setPassword}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

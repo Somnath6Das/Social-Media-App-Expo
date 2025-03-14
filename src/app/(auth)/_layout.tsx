@@ -7,9 +7,9 @@ import { AuthContextType } from "~/src/types";
 export default function Layout() {
   const theme = useTheme();
   const { auth, updateAuth } = useAuth() as AuthContextType;
-  // if (auth.isAuthenticated) {
-  //   return <Redirect href="/(tabs)" />;
-  // }
+  if (auth.isAuthenticated) {
+    return <Redirect href="/(tabs)" />;
+  }
   return (
     <Stack
       screenOptions={{

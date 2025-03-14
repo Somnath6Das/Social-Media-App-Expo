@@ -1,9 +1,24 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { OtpInput } from "react-native-otp-entry";
 import CustomButton from "~/src/components/CustomButton";
+import { EmailType } from "~/src/types";
+import { useEmail } from "~/src/global/useEmail";
+import { router } from "expo-router";
+import { useState } from "react";
 
 export default function VerifyOtp() {
+  const { otp, setOtp } = useEmail() as EmailType;
+  const [loading, setLoading] = useState(false);
+  const otpVerify = () => {
+    setLoading(true);
+    if (otp.length === 6) {
+      setLoading(false);
+      router.push("/set_password");
+    } else {
+      Alert.alert("Please put the 6 charcters otp.");
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
@@ -29,11 +44,15 @@ export default function VerifyOtp() {
             focusColor="#FFC300"
             type="numeric"
             numberOfDigits={6}
-            // onTextChange={(text) => setOtp(text)}
+            onTextChange={(text) => setOtp(text)}
             autoFocus={true}
             theme={{ containerStyle: styles.container }}
           />
-          <CustomButton title="Sign up" />
+          <CustomButton
+            title="Sign up"
+            loading={loading}
+            onPress={() => otpVerify()}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

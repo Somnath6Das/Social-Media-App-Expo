@@ -1,6 +1,9 @@
 import { create } from "zustand";
+import { EmailType } from "../types";
 
 export const useEmail = create((set) => ({
   email: "",
-  setEmail: (newEmail: any) => set(() => ({ email: newEmail })),
+  otp: "",
+  setEmail: (newEmail: EmailType) => set(() => ({ email: newEmail })),
+  setOtp: (newOtp: EmailType) => set(() => ({ otp: newOtp })),
 }));

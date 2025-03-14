@@ -8,9 +8,9 @@ export default function Layout() {
   const theme = useTheme();
   const { auth, updateAuth } = useAuth() as AuthContextType;
 
-  // if (!auth.isAuthenticated) {
-  //   return <Redirect href="/(auth)" />;
-  // }
+  if (!auth.isAuthenticated) {
+    return <Redirect href="/(auth)" />;
+  }
   return (
     <Tabs
       screenOptions={{
