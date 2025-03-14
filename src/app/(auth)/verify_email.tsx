@@ -1,11 +1,34 @@
+import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Image, ScrollView, View } from "react-native";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "~/src/components/CustomButton";
 import InputField from "~/src/components/InputField";
+import { useEmail } from "~/src/global/useEmail";
+import { supabase } from "~/src/lib/superbase";
+import { EmailType } from "~/src/types";
 
 export default function VerifyEmail() {
-  const [email, setEmail] = useState("");
+  const { heading } = useLocalSearchParams();
+  const { email, setEmail } = useEmail() as EmailType;
+  const [loading, setLoading] = useState(false);
+  const emailVerify = async () => {
+    setLoading(true);
+    if (!email) {
+      Alert.alert("Please write your email.");
+      return;
+    }
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email,
+    });
+
+    if (error) {
+      Alert.alert("Not a valid email.");
+      return;
+    }
+    setLoading(false);
+    router.push("/verify_otp");
+  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
@@ -25,6 +48,9 @@ export default function VerifyEmail() {
             marginBottom: 35,
           }}
         />
+        <Text style={{ alignSelf: "center", marginVertical: 30, fontSize: 19 }}>
+          {heading}
+        </Text>
         <View style={{ width: "100%", alignItems: "center", gap: 90 }}>
           <InputField
             title="Email"
@@ -33,7 +59,11 @@ export default function VerifyEmail() {
             handleChangeText={(e) => setEmail(e)}
             keyboardType="email-address"
           />
-          <CustomButton title="Sign up" />
+          <CustomButton
+            title="Verify"
+            loading={loading}
+            onPress={() => emailVerify()}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
