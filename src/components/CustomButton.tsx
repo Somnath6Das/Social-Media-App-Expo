@@ -3,10 +3,14 @@ import { ActivityIndicator, Pressable, Text } from "react-native";
 type ButtonProps = {
   title: string;
   onPress?: () => void;
-  loading: boolean;
+  loading?: boolean;
 };
 
-export default function CustomButton({ title, onPress, loading }: ButtonProps) {
+export default function CustomButton({
+  title,
+  onPress,
+  loading = false,
+}: ButtonProps) {
   return (
     <Pressable
       onPress={onPress}

@@ -9,6 +9,8 @@ type FormField = {
   placeholder: string;
   handleChangeText: (text: string) => void;
   keyboardType: KeyboardTypeOptions;
+  multiline?: boolean;
+  numberOfLines?: number;
 };
 
 const InputField = ({
@@ -16,14 +18,15 @@ const InputField = ({
   value,
   placeholder,
   handleChangeText,
-  keyboardType,
+  keyboardType = "default",
+  multiline = false,
+  numberOfLines = 1,
 }: FormField) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <View
       style={{
-        height: 20,
         width: "90%",
         gap: 7,
       }}
@@ -64,6 +67,8 @@ const InputField = ({
           onChangeText={handleChangeText}
           secureTextEntry={title === "Password" && !showPassword}
           keyboardType={keyboardType}
+          multiline={multiline}
+          numberOfLines={numberOfLines}
         />
 
         {title === "Password" && (
