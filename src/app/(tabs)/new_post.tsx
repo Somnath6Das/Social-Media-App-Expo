@@ -114,7 +114,7 @@ export default function NewPost() {
         }}
       >
         <InputField
-          title="Post"
+          title="Caption"
           placeholder="What is on your mind ?"
           value={caption}
           handleChangeText={(e) => {

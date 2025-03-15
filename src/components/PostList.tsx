@@ -7,7 +7,7 @@ import { AdvancedImage } from "cloudinary-react-native";
 import { supabase } from "../lib/superbase";
 import { useAuth } from "../global/useAuth";
 import { AuthContextType } from "../types";
-// import { sendLikeNotification } from "../notification/messages";
+import { sendLikeNotification } from "../notification/messages";
 
 export default function PostList({ post }: any) {
   const likeCountRef = useRef(post.likes?.[0]?.count);
@@ -43,7 +43,7 @@ export default function PostList({ post }: any) {
 
     if (data) {
       // send notification to the owner of that post
-      //   sendLikeNotification(data[0]);
+      sendLikeNotification(data[0]);
       setLikeRecord(data[0]);
     }
   };
@@ -66,7 +66,8 @@ export default function PostList({ post }: any) {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          gap: 4,
+          gap: 5,
+          margin: 3,
         }}
       >
         {post.user.avatar_url ? (
@@ -89,37 +90,50 @@ export default function PostList({ post }: any) {
         <Text style={{ fontSize: 18 }}>{post.user.username || "New user"}</Text>
       </View>
       {post.caption && (
-        <View style={{ paddingLeft: 3, paddingBottom: 3, paddingRight: 3 }}>
-          <Text style={{ color: "black", fontWeight: "semibold" }}>
+        <View style={{ marginLeft: 57, marginBottom: 20 }}>
+          <Text
+            style={{
+              fontWeight: "semibold",
+              fontSize: 16,
+              color: "#605f5f",
+            }}
+          >
             {post.caption}
           </Text>
         </View>
       )}
 
       <PostContent post={post} />
-      <View style={{ flexDirection: "row", gap: 3, padding: 3 }}>
-        <AntDesign
-          onPress={() => {
-            if (!isLiked) {
-              likeCountRef.current += 1;
-              setIsLiked(true);
-            } else {
-              likeCountRef.current -= 1;
-              setIsLiked(false);
-            }
-          }}
-          name={isLiked ? "heart" : "hearto"}
-          size={20}
-          color={isLiked ? "crimson" : "black"}
-        />
-        <Ionicons name="chatbubble-outline" size={20} />
-        <Feather name="send" size={20} />
-
-        <Feather name="bookmark" size={20} className="ml-auto" />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginVertical: 6,
+        }}
+      >
+        <View style={{ flexDirection: "row", marginLeft: 10, gap: 7 }}>
+          <AntDesign
+            onPress={() => {
+              if (!isLiked) {
+                likeCountRef.current += 1;
+                setIsLiked(true);
+              } else {
+                likeCountRef.current -= 1;
+                setIsLiked(false);
+              }
+            }}
+            name={isLiked ? "heart" : "hearto"}
+            size={20}
+            color={isLiked ? "crimson" : "black"}
+          />
+          <Ionicons name="chatbubble-outline" size={20} />
+          <Feather name="send" size={20} />
+        </View>
+        <Feather name="bookmark" size={20} style={{ marginRight: 10 }} />
       </View>
 
-      <View style={{ paddingHorizontal: 3, gap: 1 }}>
-        <Text style={{ fontWeight: "semibold" }}>
+      <View style={{ marginTop: 5, gap: 1 }}>
+        <Text style={{ fontWeight: "semibold", marginLeft: 7 }}>
           Likes {likeCountRef.current || 0}
         </Text>
       </View>
