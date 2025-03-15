@@ -16,7 +16,7 @@ export default function PostContent({ post }: { post: any }) {
 
   const player = useVideoPlayer(videoUrl || "", (player) => {
     player.loop = false;
-    player.play();
+    // player.play();
   });
 
   return post.media_type === "image" ? (

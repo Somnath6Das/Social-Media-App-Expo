@@ -28,7 +28,7 @@ export default function NewPost() {
   >();
   const player = useVideoPlayer(media || "", (player) => {
     player.loop = false;
-    player.play();
+    // player.play();
   });
   useEffect(() => {
     if (!media) {
