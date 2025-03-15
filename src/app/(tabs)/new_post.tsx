@@ -27,7 +27,7 @@ export default function NewPost() {
     "video" | "image" | "livePhoto" | "pairedVideo" | undefined
   >();
   const player = useVideoPlayer(media || "", (player) => {
-    player.loop = true;
+    player.loop = false;
     player.play();
   });
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function NewPost() {
         />
       ) : (
         <VideoView
-          style={{ width: "90%", height: 250, marginTop: 20 }}
+          style={{ width: "100%", aspectRatio: 16 / 9 }}
           player={player}
           allowsFullscreen
           allowsPictureInPicture

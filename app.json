@@ -2,7 +2,7 @@
   "expo": {
     "name": "Socialx",
     "slug": "Socialx",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "scheme": "coding-ideas",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,14 +14,17 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.somnathdas.Socialx"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.somnathdas.Socialx"
+      "package": "com.somnathdas.Socialx",
+      "googleServicesFile": "./android/app/google-services.json",
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -32,9 +35,7 @@
         "projectId": "eae9761f-c9d8-4358-87da-00ddaee2ac0c"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": "3.0.0",
     "updates": {
       "url": "https://u.expo.dev/eae9761f-c9d8-4358-87da-00ddaee2ac0c"
     },

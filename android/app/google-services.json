@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "316165215258",
+    "project_id": "socialx-d3456",
+    "storage_bucket": "socialx-d3456.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316165215258:android:3584e5370f22ef560f2da3",
+        "android_client_info": {
+          "package_name": "com.somnathdas.Socialx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA95LwLAjk8m9buqCUperX5HGXE4xlrW44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
