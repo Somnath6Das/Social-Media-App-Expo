@@ -64,7 +64,7 @@ export default function Home() {
             marginBottom: 35,
           }}
         />
-        <View style={{ width: "100%", alignItems: "center", gap: 90 }}>
+        <View style={{ width: "100%", alignItems: "center", gap: 10 }}>
           <InputField
             title="Email"
             value={form.email}

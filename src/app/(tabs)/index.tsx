@@ -33,21 +33,18 @@ export default function Home() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      {/* <PostList className="gap-10 max-w-40 self-center w-full" /> */}
-      <FlatList
-        data={posts}
-        renderItem={({ item }: any) => <PostList post={item} />}
-        contentContainerStyle={{
-          gap: 10,
-          maxWidth: 512,
-          alignSelf: "center",
-          width: "100%",
-        }}
-        showsVerticalScrollIndicator={false}
-        onRefresh={fetchPosts}
-        refreshing={loading}
-      />
-    </SafeAreaView>
+    <FlatList
+      data={posts}
+      renderItem={({ item }: any) => <PostList post={item} />}
+      contentContainerStyle={{
+        gap: 10,
+        maxWidth: 512,
+        alignSelf: "center",
+        width: "100%",
+      }}
+      showsVerticalScrollIndicator={false}
+      onRefresh={fetchPosts}
+      refreshing={loading}
+    />
   );
 }
