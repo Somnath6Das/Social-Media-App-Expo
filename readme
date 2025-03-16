@@ -1,4 +1,4 @@
-// superbase docs
+//? superbase docs
 https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native
 
 // need dependency
@@ -39,7 +39,7 @@ npm i cloudinary-react-native
 // need to create a preset
 // cloudinary setting > upload > Create Preset (Unsign Preset)
 
-// Push Notification
+//? Push Notification
 https://docs.expo.dev/push-notifications/push-notifications-setup/
 
 eas init
