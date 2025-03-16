@@ -1,19 +1,82 @@
-interface ThemeState {
-// ... existing properties
-customTheme: Partial<typeof lightTheme>;
-setCustomTheme: (custom: Partial<typeof lightTheme>) => void;
+// superbase docs
+https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native
+
+// need dependency
+npx expo install @supabase/supabase-js @react-native-async-storage/async-storage
+
+// create new project.
+
+// api key get path
+// click project > project settings > Data API > URL, anon public.
+
+// create auth table
+// SQL Editor (option on left sidebar) > Quick starts > User Management Starter > run.
+
+// First Time Sign up otp mail config:
+// Authentication (option on left sidebar) > Emails > Confirm signup > write code > save.
+
+// Forget password to reset password get otp config:
+// Authentication (option on left sidebar) > Emails > Magic Link > write code > save.
+
+// expo image picker
+npx expo install expo-image-picker
+//app.json
+"plugins": [
+      "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
+
+// Cloudinary docs
+https://cloudinary.com/documentation/react_native_integration#landingpage
+
+npm i cloudinary-react-native
+
+// need to create a preset
+// cloudinary setting > upload > Create Preset (Unsign Preset)
+
+// Push Notification
+https://docs.expo.dev/push-notifications/push-notifications-setup/
+
+eas init
+// download and paste firebase json file in android/app folder
+
+// get android and iOS folder.
+npx expo prebuild
+
+// app.json mention firebase file
+"android": {
+"googleServicesFile": "./android/app/google-services.json"
 }
 
-const MyComponent = () => {
-const theme = useTheme();
-const { theme: currentTheme, setTheme } = useThemeStore();
 
-return (
-<View style={{ backgroundColor: theme.background }}>
-<Text style={{ color: theme.text }}>
-Current theme: {currentTheme}
-</Text>
-</View>
-);
-};
+// project level build.gradle
+dependencies {
+classpath('com.google.gms:google-services:4.3.15')
+}
+
+// app level build.gradle
+apply plugin: 'com.google.gms.google-services'
+
+
+// download private key file from firebase
+project settings > service accounts > Generate new private key
+// upload this key file to
+expo.dev > configuration > credentials > FCM V1 service account key
+
+
+// Build error app level grade
+android { 
+defaultConfig { 
+// Add this if not present 
+externalNativeBuild { 
+cmake { arguments "-DANDROID_STL=c++_shared" } 
+} } 
+}
+
+
 

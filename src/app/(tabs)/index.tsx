@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Alert, FlatList, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import PostList from "~/src/components/PostList";
 import { supabase } from "~/src/lib/superbase";
 import { useAuth } from "~/src/global/useAuth";
@@ -30,7 +29,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <FlatList
