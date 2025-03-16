@@ -19,6 +19,7 @@ import InputField from "~/src/components/InputField";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "cloudinary-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 export default function Profile() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
@@ -62,16 +63,17 @@ export default function Profile() {
       bio,
       avatar_url: "",
     };
-
+    setLoading(true);
     if (image) {
       const response = await uploadImage(image);
       updatedProfile.avatar_url = response.public_id;
     }
-    setLoading(true);
+
     const { data, error } = await supabase
       .from("profiles")
       .update(updatedProfile)
       .eq("id", auth.user.id);
+
     setLoading(false);
     if (error) {
       Alert.alert("Failed to update profile");
@@ -143,7 +145,11 @@ export default function Profile() {
         />
         <CustomButton
           title="Sign out"
-          onPress={() => supabase.auth.signOut()}
+          onPress={() => {
+            setLoading(true);
+            supabase.auth.signOut();
+            setLoading(false);
+          }}
           loading={loading}
         />
       </View>

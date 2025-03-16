@@ -37,12 +37,11 @@ export default function SetPassword() {
     const { error: updateError } = await supabase.auth.updateUser({
       password: pass.passWord,
     });
-
+    setLoading(false);
     if (updateError) {
       Alert.alert(updateError?.message);
       return;
     }
-    setLoading(false);
   };
   return (
     <SafeAreaView style={{ flex: 1 }}>

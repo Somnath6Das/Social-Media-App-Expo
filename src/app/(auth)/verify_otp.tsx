@@ -9,11 +9,9 @@ import { useState } from "react";
 
 export default function VerifyOtp() {
   const { otp, setOtp } = useEmail() as EmailType;
-  const [loading, setLoading] = useState(false);
+
   const otpVerify = () => {
-    setLoading(true);
     if (otp.length === 6) {
-      setLoading(false);
       router.push("/set_password");
     } else {
       Alert.alert("Please put the 6 charcters otp.");
@@ -48,11 +46,7 @@ export default function VerifyOtp() {
             autoFocus={true}
             theme={{ containerStyle: styles.container }}
           />
-          <CustomButton
-            title="Sign up"
-            loading={loading}
-            onPress={() => otpVerify()}
-          />
+          <CustomButton title="Sign up" onPress={() => otpVerify()} />
         </View>
       </ScrollView>
     </SafeAreaView>

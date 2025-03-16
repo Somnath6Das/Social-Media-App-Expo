@@ -21,6 +21,7 @@ import InputField from "~/src/components/InputField";
 export default function NewPost() {
   const router = useRouter();
   const { auth, updateAuth } = useAuth() as AuthContextType;
+  const [loading, setLoading] = useState(false);
   const [caption, setCaption] = useState("");
   const [media, setMedia] = useState<string | null>("");
   const [mediaType, setMediaType] = useState<
@@ -51,6 +52,7 @@ export default function NewPost() {
   };
 
   const createPost = async () => {
+    setLoading(true);
     let response;
     if (media) {
       response = await uploadImage(media);
@@ -67,7 +69,7 @@ export default function NewPost() {
         },
       ])
       .select();
-
+    setLoading(false);
     router.push("/(tabs)");
   };
 
@@ -123,7 +125,7 @@ export default function NewPost() {
           keyboardType="default"
         />
 
-        <CustomButton title="Share" onPress={createPost} />
+        <CustomButton title="Share" onPress={createPost} loading={loading} />
       </View>
     </SafeAreaView>
   );
