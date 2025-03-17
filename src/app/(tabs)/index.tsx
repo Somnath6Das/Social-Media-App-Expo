@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Alert, FlatList, Text, View } from "react-native";
 import PostList from "~/src/components/PostList";
 import { supabase } from "~/src/lib/superbase";
@@ -29,21 +29,23 @@ export default function Home() {
 
   useEffect(() => {
     fetchPosts();
-  }, [posts]);
+  }, []);
 
   return (
-    <FlatList
-      data={posts}
-      renderItem={({ item }: any) => <PostList post={item} />}
-      contentContainerStyle={{
-        gap: 10,
-        maxWidth: 512,
-        alignSelf: "center",
-        width: "100%",
-      }}
-      showsVerticalScrollIndicator={false}
-      onRefresh={fetchPosts}
-      refreshing={loading}
-    />
+    <>
+      <FlatList
+        data={posts}
+        renderItem={({ item }: any) => <PostList post={item} />}
+        contentContainerStyle={{
+          gap: 10,
+          maxWidth: 512,
+          alignSelf: "center",
+          width: "100%",
+        }}
+        showsVerticalScrollIndicator={false}
+        onRefresh={fetchPosts}
+        refreshing={loading}
+      />
+    </>
   );
 }

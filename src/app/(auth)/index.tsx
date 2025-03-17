@@ -1,5 +1,5 @@
 import { Link, router } from "expo-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Alert,
   Image,
@@ -21,6 +21,7 @@ export default function Home() {
     email: "",
     password: "",
   });
+
   const [errorInfo, setErrorInfo] = useState(false);
   const [loading, setLoading] = useState(false);
   const signInWithEmail = async () => {

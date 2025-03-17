@@ -129,6 +129,7 @@ export default function PostList({ post }: any) {
           <Ionicons name="chatbubble-outline" size={20} />
           <Feather name="send" size={20} />
         </View>
+
         <Feather name="bookmark" size={20} style={{ marginRight: 10 }} />
       </View>
 
