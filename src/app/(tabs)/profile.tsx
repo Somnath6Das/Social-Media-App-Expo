@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import CustomButton from "~/src/components/CustomButton";
 import { supabase } from "~/src/lib/superbase";
 import { useAuth } from "~/src/global/useAuth";
@@ -18,8 +18,11 @@ import { cld, uploadImage } from "~/src/lib/cloudinary";
 import InputField from "~/src/components/InputField";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "cloudinary-react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
+import BottomSheetComponent from "~/src/components/BottomSheet";
+import BottomSheet from "@gorhom/bottom-sheet";
+import ColorModeSettings from "~/src/components/ColorModeSettings";
 
 export default function Profile() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
@@ -28,6 +31,11 @@ export default function Profile() {
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const openSheet = useCallback(() => {
+    bottomSheetRef.current?.expand();
+  }, []);
   useEffect(() => {
     getProfile();
   }, []);
@@ -101,59 +109,71 @@ export default function Profile() {
     remoteCldImage.resize(thumbnail().width(300).height(300));
   }
   return (
-    <SafeAreaView style={styles.container}>
-      {image ? (
-        // local picked image
-        <Image source={{ uri: image }} style={styles.profileImage} />
-      ) : remoteCldImage ? (
-        <AdvancedImage cldImg={remoteCldImage} style={styles.profileImage} />
-      ) : (
-        <View style={styles.profilePlaceholder} />
-      )}
-      <TouchableOpacity onPress={pickImage}>
-        <Text style={styles.changeText}>Change</Text>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <TouchableOpacity
+        onPress={openSheet}
+        style={{ alignItems: "flex-end", marginRight: 15, marginTop: 15 }}
+      >
+        <Ionicons name="settings-sharp" size={26} color="black" />
       </TouchableOpacity>
+      <View style={styles.container}>
+        {image ? (
+          // local picked image
+          <Image source={{ uri: image }} style={styles.profileImage} />
+        ) : remoteCldImage ? (
+          <AdvancedImage cldImg={remoteCldImage} style={styles.profileImage} />
+        ) : (
+          <View style={styles.profilePlaceholder} />
+        )}
+        <TouchableOpacity onPress={pickImage}>
+          <Text style={styles.changeText}>Change</Text>
+        </TouchableOpacity>
 
-      <View style={styles.inputContainer}>
-        <InputField
-          title="Username"
-          placeholder="Username"
-          value={username}
-          handleChangeText={(e) => {
-            setUsername(e);
-          }}
-          keyboardType="default"
-        />
-        <InputField
-          title="Bio"
-          placeholder="Bio"
-          value={bio}
-          handleChangeText={(e) => {
-            setBio(e);
-          }}
-          keyboardType="default"
-          multiline
-          numberOfLines={3}
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <InputField
+            title="Username"
+            placeholder="Username"
+            value={username}
+            handleChangeText={(e) => {
+              setUsername(e);
+            }}
+            keyboardType="default"
+          />
+          <InputField
+            title="Bio"
+            placeholder="Bio"
+            value={bio}
+            handleChangeText={(e) => {
+              setBio(e);
+            }}
+            keyboardType="default"
+            multiline
+            numberOfLines={3}
+          />
+        </View>
 
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          title="Update profile"
-          onPress={updateProfile}
-          loading={loading}
-        />
-        <CustomButton
-          title="Sign out"
-          onPress={() => {
-            setLoading(true);
-            supabase.auth.signOut();
-            setLoading(false);
-          }}
-          loading={loading}
-        />
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            title="Update profile"
+            onPress={updateProfile}
+            loading={loading}
+          />
+          <CustomButton
+            title="Sign out"
+            onPress={() => {
+              setLoading(true);
+              supabase.auth.signOut();
+              setLoading(false);
+            }}
+            loading={loading}
+          />
+        </View>
       </View>
-    </SafeAreaView>
+      <BottomSheetComponent
+        bottomSheetRef={bottomSheetRef}
+        ViewModel={<ColorModeSettings />}
+      />
+    </GestureHandlerRootView>
   );
 }
 const styles = StyleSheet.create({
@@ -188,6 +208,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: "center",
     marginTop: "auto",
+    marginBottom: 10,
     width: "90%",
     gap: 8,
   },

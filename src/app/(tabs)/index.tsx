@@ -7,6 +7,7 @@ import { AuthContextType } from "~/src/types";
 import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetComponent from "~/src/components/BottomSheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import CommandView from "~/src/components/CommandView";
 
 export default function Home() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
@@ -55,7 +56,10 @@ export default function Home() {
         onRefresh={fetchPosts}
         refreshing={loading}
       />
-      <BottomSheetComponent bottomSheetRef={bottomSheetRef} />
+      <BottomSheetComponent
+        bottomSheetRef={bottomSheetRef}
+        ViewModel={<CommandView />}
+      />
     </GestureHandlerRootView>
   );
 }

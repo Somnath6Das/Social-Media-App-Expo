@@ -1,5 +1,7 @@
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { Redirect, Tabs } from "expo-router";
+
 import { useAuth } from "~/src/global/useAuth";
 import NotificationProvider from "~/src/notification/provider";
 import { useTheme } from "~/src/theme/ThemeProvider";

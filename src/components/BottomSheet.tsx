@@ -1,8 +1,9 @@
 import React, { useCallback, useMemo, useRef } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { FontAwesome } from "@expo/vector-icons";
 
-const BottomSheetComponent = ({ bottomSheetRef }: any) => {
+const BottomSheetComponent = ({ bottomSheetRef, ViewModel }: any) => {
   const snapPoints = useMemo(() => ["50%", "70%"], []);
 
   const handleSheetChanges = useCallback((index: number) => {
@@ -22,7 +23,14 @@ const BottomSheetComponent = ({ bottomSheetRef }: any) => {
       enablePanDownToClose={true}
     >
       <BottomSheetView style={styles.contentContainer}>
-        <Text onPress={handleClosePress}>Awesome 🎉</Text>
+        <TouchableOpacity
+          onPress={handleClosePress}
+          style={{ alignItems: "flex-end", marginRight: 20 }}
+        >
+          <FontAwesome name="close" size={24} color="black" />
+        </TouchableOpacity>
+
+        {ViewModel}
       </BottomSheetView>
     </BottomSheet>
   );
@@ -30,8 +38,6 @@ const BottomSheetComponent = ({ bottomSheetRef }: any) => {
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    padding: 36,
-    alignItems: "center",
   },
 });
 export default BottomSheetComponent;
