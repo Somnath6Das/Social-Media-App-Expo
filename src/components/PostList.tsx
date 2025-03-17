@@ -1,4 +1,10 @@
-import { Image, Text, useWindowDimensions, View } from "react-native";
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { Ionicons, Feather, AntDesign } from "@expo/vector-icons";
 import PostContent from "./PostContent";
 import { useEffect, useRef, useState } from "react";
@@ -9,7 +15,7 @@ import { useAuth } from "../global/useAuth";
 import { AuthContextType } from "../types";
 import { sendLikeNotification } from "../notification/messages";
 
-export default function PostList({ post }: any) {
+export default function PostList({ post, openSheet }: any) {
   const likeCountRef = useRef(post.likes?.[0]?.count);
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [isLiked, setIsLiked] = useState(false);
@@ -126,7 +132,9 @@ export default function PostList({ post }: any) {
             size={20}
             color={isLiked ? "crimson" : "black"}
           />
-          <Ionicons name="chatbubble-outline" size={20} />
+          <TouchableOpacity onPress={() => openSheet()}>
+            <Ionicons name="chatbubble-outline" size={20} />
+          </TouchableOpacity>
           <Feather name="send" size={20} />
         </View>
 

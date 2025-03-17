@@ -1,15 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import { Alert, FlatList, Text, View } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import PostList from "~/src/components/PostList";
 import { supabase } from "~/src/lib/superbase";
 import { useAuth } from "~/src/global/useAuth";
 import { AuthContextType } from "~/src/types";
+import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheetComponent from "~/src/components/BottomSheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Home() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any[] | null>([]);
 
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const openSheet = useCallback(() => {
+    bottomSheetRef.current?.expand();
+  }, []);
   const fetchPosts = async () => {
     setLoading(true);
     let { data, error } = await supabase
@@ -32,10 +39,12 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <GestureHandlerRootView>
       <FlatList
         data={posts}
-        renderItem={({ item }: any) => <PostList post={item} />}
+        renderItem={({ item }: any) => (
+          <PostList post={item} openSheet={openSheet} />
+        )}
         contentContainerStyle={{
           gap: 10,
           maxWidth: 512,
@@ -46,6 +55,7 @@ export default function Home() {
         onRefresh={fetchPosts}
         refreshing={loading}
       />
-    </>
+      <BottomSheetComponent bottomSheetRef={bottomSheetRef} />
+    </GestureHandlerRootView>
   );
 }
