@@ -1,14 +1,12 @@
 import React, { useCallback, useMemo, useRef } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const BottomSheetComponent = ({ bottomSheetRef }: any) => {
   const snapPoints = useMemo(() => ["50%", "70%"], []);
-  // callbacks
+
   const handleSheetChanges = useCallback((index: number) => {
     if (index === -1) {
-      // Bottom sheet is closed
       bottomSheetRef.current?.close();
     }
   }, []);
