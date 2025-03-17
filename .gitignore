@@ -2,8 +2,9 @@
 
 # dependencies
 node_modules/
+
+.env
 ios/
-*.env*
 # Expo
 .expo/
 dist/
