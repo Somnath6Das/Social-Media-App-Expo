@@ -3,8 +3,13 @@ import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { FontAwesome } from "@expo/vector-icons";
 
-const BottomSheetComponent = ({ bottomSheetRef, ViewModel }: any) => {
-  const snapPoints = useMemo(() => ["50%", "70%"], []);
+const BottomSheetComponent = ({
+  bottomSheetRef,
+  ViewModel,
+  minIndex,
+  maxIndex,
+}: any) => {
+  const snapPoints = useMemo(() => [minIndex, maxIndex], []);
 
   const handleSheetChanges = useCallback((index: number) => {
     if (index === -1) {

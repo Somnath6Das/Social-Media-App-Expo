@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { ThemeProvider } from "../theme/ThemeProvider";
 import { useTheme } from "../theme/ThemeProvider";
-import { ActivityIndicator, AppState } from "react-native";
+import { ActivityIndicator, AppState, View } from "react-native";
 import { supabase } from "../lib/superbase";
 import { useEffect } from "react";
 import { useAuth } from "../global/useAuth";
@@ -38,7 +38,11 @@ export default function RootLayout() {
     });
   }, []);
   if (!auth.isReady) {
-    return <ActivityIndicator size="large" color="#ecaf0a" />;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#ecaf0a" />
+      </View>
+    );
   }
   return (
     <ThemeProvider>

@@ -172,6 +172,8 @@ export default function Profile() {
       <BottomSheetComponent
         bottomSheetRef={bottomSheetRef}
         ViewModel={<ColorModeSettings />}
+        minIndex="25%"
+        maxIndex="50%"
       />
     </GestureHandlerRootView>
   );

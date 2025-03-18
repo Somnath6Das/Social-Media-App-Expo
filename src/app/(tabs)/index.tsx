@@ -59,6 +59,8 @@ export default function Home() {
       <BottomSheetComponent
         bottomSheetRef={bottomSheetRef}
         ViewModel={<CommandView />}
+        minIndex="50%"
+        maxIndex="70%"
       />
     </GestureHandlerRootView>
   );
