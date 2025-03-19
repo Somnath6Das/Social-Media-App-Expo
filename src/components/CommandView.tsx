@@ -1,7 +1,17 @@
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useEffect,
+  useState,
+} from "react";
 import { Image, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { supabase } from "../lib/superbase";
 
-export default function CommandView() {
+export default function CommandView({ post }: any) {
   return (
     <ScrollView>
       <View
@@ -18,7 +28,7 @@ export default function CommandView() {
           style={{ width: 35, height: 35, aspectRatio: 1, borderRadius: 50 }}
         />
 
-        <Text style={{ fontSize: 15, fontWeight: "500" }}>Username</Text>
+        <Text style={{ fontSize: 15, fontWeight: "500" }}>{post.id}</Text>
       </View>
       <View style={{ marginLeft: 55, marginRight: 6 }}>
         <Text>

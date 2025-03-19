@@ -18,6 +18,11 @@ export type ButtonProps = {
 export type EmailType = {
   email: string;
   otp: string;
-  setEmail: (auth: any) => void;
-  setOtp: (auth: any) => void;
+  setEmail: (email: any) => void;
+  setOtp: (otp: any) => void;
+};
+
+export type PostIdType = {
+  postId: string;
+  setPostId: (postId: any) => void;
 };

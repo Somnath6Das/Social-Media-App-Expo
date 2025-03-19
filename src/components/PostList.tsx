@@ -94,6 +94,7 @@ export default function PostList({ post, openSheet }: any) {
           />
         )}
         <Text style={{ fontSize: 18 }}>{post.user.username || "New user"}</Text>
+        <Text>{post.id}</Text>
       </View>
       {post.caption && (
         <View style={{ marginLeft: 57, marginBottom: 20 }}>

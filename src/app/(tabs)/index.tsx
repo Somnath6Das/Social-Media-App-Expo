@@ -18,6 +18,7 @@ export default function Home() {
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
+
   const fetchPosts = async () => {
     setLoading(true);
     let { data, error } = await supabase
@@ -58,7 +59,23 @@ export default function Home() {
       />
       <BottomSheetComponent
         bottomSheetRef={bottomSheetRef}
-        ViewModel={<CommandView />}
+        ViewModel={
+          <FlatList
+            data={posts}
+            renderItem={({ item }: any) => (
+              <CommandView post={item} openSheet={openSheet} />
+            )}
+            contentContainerStyle={{
+              gap: 10,
+              maxWidth: 512,
+              alignSelf: "center",
+              width: "100%",
+            }}
+            showsVerticalScrollIndicator={false}
+            onRefresh={fetchPosts}
+            refreshing={loading}
+          />
+        }
         minIndex="50%"
         maxIndex="70%"
       />
