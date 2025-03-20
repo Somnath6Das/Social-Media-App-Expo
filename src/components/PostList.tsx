@@ -18,7 +18,7 @@ import { useComments } from "../global/useComments";
 
 export default function PostList({ post, openSheet }: any) {
   const likeCountRef = useRef(post.likes?.[0]?.count);
-  const { auth, updateAuth } = useAuth() as AuthContextType;
+  const { auth } = useAuth() as AuthContextType;
   const [isLiked, setIsLiked] = useState(false);
   const [likeRecord, setLikeRecord] = useState<{ id: string } | null>(null);
 
@@ -110,8 +110,7 @@ export default function PostList({ post, openSheet }: any) {
             style={{ width: 50, height: 50, aspectRatio: 1, borderRadius: 50 }}
           />
         )}
-        <Text style={{ fontSize: 18 }}>{post.user.username || "New user"}</Text>
-        <Text>{post.id}</Text>
+        <Text style={{ fontSize: 18 }}>{post.user.username || "new user"}</Text>
       </View>
       {post.caption && (
         <View style={{ marginLeft: 57, marginBottom: 20 }}>
