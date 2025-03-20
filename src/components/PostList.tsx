@@ -21,6 +21,9 @@ export default function PostList({ post, openSheet }: any) {
   const [isLiked, setIsLiked] = useState(false);
   const [likeRecord, setLikeRecord] = useState<{ id: string } | null>(null);
 
+  const [comments, setComments] = useState<any[] | null>();
+  const [loading, setLoading] = useState(false);
+
   let avatar = cld.image(post.user.avatar_url);
 
   useEffect(() => {
@@ -65,6 +68,20 @@ export default function PostList({ post, openSheet }: any) {
       }
     }
   };
+
+  const fatchComments = async (postId: string) => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("comments")
+      .select("id, comment, created_at, profiles (username, avatar_url)")
+      .eq("post_id", postId)
+      .order("created_at", { ascending: false });
+    console.log(JSON.stringify(data, null, 2));
+    setComments(data);
+
+    setLoading(false);
+  };
+
   return (
     <View style={{ flex: 1 }}>
       {/* Header */}
@@ -133,7 +150,13 @@ export default function PostList({ post, openSheet }: any) {
             size={20}
             color={isLiked ? "crimson" : "black"}
           />
-          <TouchableOpacity onPress={() => openSheet()}>
+          <TouchableOpacity
+            onPress={() => {
+              console.log(post.id);
+              fatchComments(post.id);
+              openSheet();
+            }}
+          >
             <Ionicons name="chatbubble-outline" size={20} />
           </TouchableOpacity>
           <Feather name="send" size={20} />

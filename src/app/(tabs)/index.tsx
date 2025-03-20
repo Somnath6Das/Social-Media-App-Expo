@@ -14,6 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any[] | null>([]);
 
+  const [comments, setComments] = useState<any[] | null>();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
@@ -61,7 +62,7 @@ export default function Home() {
         bottomSheetRef={bottomSheetRef}
         ViewModel={
           <FlatList
-            data={posts}
+            data={comments}
             renderItem={({ item }: any) => (
               <CommandView post={item} openSheet={openSheet} />
             )}

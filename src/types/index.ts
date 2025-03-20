@@ -22,7 +22,7 @@ export type EmailType = {
   setOtp: (otp: any) => void;
 };
 
-export type PostIdType = {
+export type CommentsType = {
   postId: string;
   setPostId: (postId: any) => void;
 };
