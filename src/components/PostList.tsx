@@ -12,8 +12,9 @@ import { cld } from "~/src/lib/cloudinary";
 import { AdvancedImage } from "cloudinary-react-native";
 import { supabase } from "../lib/superbase";
 import { useAuth } from "../global/useAuth";
-import { AuthContextType } from "../types";
+import { AuthContextType, CommentsType } from "../types";
 import { sendLikeNotification } from "../notification/messages";
+import { useComments } from "../global/useComments";
 
 export default function PostList({ post, openSheet }: any) {
   const likeCountRef = useRef(post.likes?.[0]?.count);
@@ -21,7 +22,7 @@ export default function PostList({ post, openSheet }: any) {
   const [isLiked, setIsLiked] = useState(false);
   const [likeRecord, setLikeRecord] = useState<{ id: string } | null>(null);
 
-  const [comments, setComments] = useState<any[] | null>();
+  const { setComments } = useComments() as CommentsType;
   const [loading, setLoading] = useState(false);
 
   let avatar = cld.image(post.user.avatar_url);
@@ -76,9 +77,8 @@ export default function PostList({ post, openSheet }: any) {
       .select("id, comment, created_at, profiles (username, avatar_url)")
       .eq("post_id", postId)
       .order("created_at", { ascending: false });
-    console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.stringify(data, null, 2));
     setComments(data);
-
     setLoading(false);
   };
 
@@ -152,7 +152,6 @@ export default function PostList({ post, openSheet }: any) {
           />
           <TouchableOpacity
             onPress={() => {
-              console.log(post.id);
               fatchComments(post.id);
               openSheet();
             }}

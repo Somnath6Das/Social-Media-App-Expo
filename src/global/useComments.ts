@@ -3,6 +3,6 @@ import { CommentsType } from "../types";
 
 export const useComments = create((set) => ({
   comments: "",
-  setPostId: (newComment: CommentsType) =>
+  setComments: (newComment: CommentsType) =>
     set(() => ({ comments: newComment })),
 }));

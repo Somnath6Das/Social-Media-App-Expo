@@ -23,6 +23,6 @@ export type EmailType = {
 };
 
 export type CommentsType = {
-  postId: string;
-  setPostId: (postId: any) => void;
+  comments: string;
+  setComments: (postId: any) => void;
 };

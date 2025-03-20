@@ -3,22 +3,23 @@ import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import PostList from "~/src/components/PostList";
 import { supabase } from "~/src/lib/superbase";
 import { useAuth } from "~/src/global/useAuth";
-import { AuthContextType } from "~/src/types";
+import { AuthContextType, CommentsType } from "~/src/types";
 import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetComponent from "~/src/components/BottomSheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CommandView from "~/src/components/CommandView";
+import { useComments } from "~/src/global/useComments";
 
 export default function Home() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any[] | null>([]);
 
-  const [comments, setComments] = useState<any[] | null>();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
+  const { comments } = useComments() as CommentsType;
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -64,7 +65,7 @@ export default function Home() {
           <FlatList
             data={comments}
             renderItem={({ item }: any) => (
-              <CommandView post={item} openSheet={openSheet} />
+              <CommandView comment={item} openSheet={openSheet} />
             )}
             contentContainerStyle={{
               gap: 10,

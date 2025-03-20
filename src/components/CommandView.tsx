@@ -1,7 +1,9 @@
 import { Image, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function CommandView({ post }: any) {
+export default function CommentView({ post, comment }: any) {
+  console.log(JSON.stringify(comment, null, 2));
+
   return (
     <ScrollView>
       <View
@@ -18,15 +20,12 @@ export default function CommandView({ post }: any) {
           style={{ width: 35, height: 35, aspectRatio: 1, borderRadius: 50 }}
         />
 
-        <Text style={{ fontSize: 15, fontWeight: "500" }}>username</Text>
+        <Text style={{ fontSize: 15, fontWeight: "500" }}>
+          {comment?.profiles?.username}
+        </Text>
       </View>
       <View style={{ marginLeft: 55, marginRight: 6 }}>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          possimus tenetur vel assumenda, temporibus nulla, tempore at explicabo
-          enim libero minima id deserunt nobis minus molestias dolores! Error,
-          itaque reiciendis?
-        </Text>
+        <Text>{comment.comment}</Text>
       </View>
     </ScrollView>
   );
