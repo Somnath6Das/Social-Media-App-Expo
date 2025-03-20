@@ -4,7 +4,7 @@ import { cld } from "~/src/lib/cloudinary";
 import { AdvancedImage } from "cloudinary-react-native";
 
 export default function CommentView({ comment }: any) {
-  console.log(JSON.stringify(comment, null, 2));
+  // console.log(JSON.stringify(comment, null, 2));
   let avatar = cld.image(comment.profiles.avatar_url);
   return (
     <ScrollView contentContainerStyle={{ marginBottom: 18 }}>

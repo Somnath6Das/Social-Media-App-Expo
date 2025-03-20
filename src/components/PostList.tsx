@@ -23,7 +23,8 @@ export default function PostList({ post, openSheet }: any) {
   const [likeRecord, setLikeRecord] = useState<{ id: string } | null>(null);
 
   const { setComments } = useComments() as CommentsType;
-  const [loading, setLoading] = useState(false);
+
+  const [commentCount, setCommentCount] = useState<number | null>(null);
 
   let avatar = cld.image(post.user.avatar_url);
 
@@ -70,17 +71,28 @@ export default function PostList({ post, openSheet }: any) {
     }
   };
 
-  const fatchComments = async (postId: string) => {
-    setLoading(true);
-    const { data, error } = await supabase
+  const fatchComments = async () => {
+    const { data, count, error } = await supabase
       .from("comments")
-      .select("id, comment, created_at, profiles (username, avatar_url)")
-      .eq("post_id", postId)
+      .select(
+        "id, comment, created_at, post_id, profiles (username, avatar_url)",
+        {
+          count: "exact",
+        }
+      )
+      .eq("post_id", post.id)
       .order("created_at", { ascending: false });
+    if (error) {
+      console.log(error);
+    }
     // console.log(JSON.stringify(data, null, 2));
+    // console.log(count);
+    setCommentCount(count);
     setComments(data);
-    setLoading(false);
   };
+  useEffect(() => {
+    fatchComments();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -151,7 +163,7 @@ export default function PostList({ post, openSheet }: any) {
           />
           <TouchableOpacity
             onPress={() => {
-              fatchComments(post.id);
+              fatchComments();
               openSheet();
             }}
           >
@@ -163,9 +175,12 @@ export default function PostList({ post, openSheet }: any) {
         <Feather name="bookmark" size={20} style={{ marginRight: 10 }} />
       </View>
 
-      <View style={{ marginTop: 5, gap: 1 }}>
+      <View style={{ flexDirection: "row", marginTop: 5, gap: 1 }}>
         <Text style={{ fontWeight: "semibold", marginLeft: 7 }}>
           Likes {likeCountRef.current || 0}
+        </Text>
+        <Text style={{ fontWeight: "semibold", marginLeft: 7 }}>
+          Comments {commentCount?.toString()}
         </Text>
       </View>
     </View>
