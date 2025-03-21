@@ -8,6 +8,7 @@ const BottomSheetComponent = ({
   ViewModel,
   minIndex,
   maxIndex,
+  commandInput = null,
 }: any) => {
   const snapPoints = useMemo(() => [minIndex, maxIndex], []);
 
@@ -34,8 +35,10 @@ const BottomSheetComponent = ({
         >
           <FontAwesome name="close" size={24} color="black" />
         </TouchableOpacity>
-
-        {ViewModel}
+        <View style={styles.modelContent}>
+          {ViewModel}
+          {commandInput}
+        </View>
       </BottomSheetView>
     </BottomSheet>
   );
@@ -43,6 +46,10 @@ const BottomSheetComponent = ({
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
+  },
+  modelContent: {
+    flex: 1,
+    justifyContent: "space-between",
   },
 });
 export default BottomSheetComponent;

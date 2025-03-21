@@ -7,8 +7,9 @@ import { AuthContextType, CommentsType } from "~/src/types";
 import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetComponent from "~/src/components/BottomSheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import CommandView from "~/src/components/CommandView";
+import CommandList from "~/src/components/CommandList";
 import { useComments } from "~/src/global/useComments";
+import CommandInput from "~/src/components/CommandInput";
 
 export default function Home() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
@@ -65,7 +66,7 @@ export default function Home() {
           <FlatList
             data={comments}
             renderItem={({ item }: any) => (
-              <CommandView comment={item} openSheet={openSheet} />
+              <CommandList comment={item} openSheet={openSheet} />
             )}
             contentContainerStyle={{
               gap: 10,
@@ -78,6 +79,7 @@ export default function Home() {
             refreshing={loading}
           />
         }
+        commandInput={<CommandInput />}
         minIndex="50%"
         maxIndex="70%"
       />
