@@ -65,9 +65,7 @@ export default function Home() {
         ViewModel={
           <FlatList
             data={comments}
-            renderItem={({ item }: any) => (
-              <CommandList comment={item} openSheet={openSheet} />
-            )}
+            renderItem={({ item }: any) => <CommandList comment={item} />}
             contentContainerStyle={{
               gap: 10,
               maxWidth: 512,
