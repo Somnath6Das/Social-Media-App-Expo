@@ -34,7 +34,7 @@ export default function Home() {
     if (error) {
       Alert.alert("Something went wrong");
     }
-    // console.log(JSON.stringify(data, null, 2));
+    console.log(JSON.stringify(data, null, 2));
     setPosts(data);
     setLoading(false);
   };
@@ -73,6 +73,17 @@ export default function Home() {
               width: "100%",
             }}
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text>No comments yet</Text>
+              </View>
+            }
             onRefresh={fetchPosts}
             refreshing={loading}
           />
