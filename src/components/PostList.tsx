@@ -14,12 +14,12 @@ import { supabase } from "../lib/superbase";
 import { useAuth } from "../global/useAuth";
 import { AuthContextType } from "../types";
 import { sendLikeNotification } from "../notification/messages";
-import { useComments } from "../global/useComments";
+import { useCommentStore } from "../global/useComments";
 
 export default function PostList({ post, openSheet }: any) {
   const likeCountRef = useRef(post.likes?.[0]?.count);
   const { auth } = useAuth() as AuthContextType;
-  const { setComments } = useComments();
+
   const [isLiked, setIsLiked] = useState(false);
   const [likeRecord, setLikeRecord] = useState<{ id: string } | null>(null);
 
@@ -85,16 +85,7 @@ export default function PostList({ post, openSheet }: any) {
     // console.log(count);
     setCommentCount(count);
     if (data) {
-      data.map((comment) =>
-        setComments([
-          {
-            comment: comment.comment,
-            post_id: comment.post_id,
-            username: comment.user.username,
-            avatar_url: comment.user.avatar_url,
-          },
-        ])
-      );
+      useCommentStore.getState().setComments(data);
     }
   };
   useEffect(() => {

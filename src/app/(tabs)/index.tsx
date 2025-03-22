@@ -10,13 +10,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CommandList from "~/src/components/CommandList";
 
 import CommandInput from "~/src/components/CommandInput";
-import { useComments } from "~/src/global/useComments";
+import { useCommentStore } from "~/src/global/useComments";
 
 export default function Home() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any[] | null>([]);
-  const { comments } = useComments();
+  const comments = useCommentStore((state) => state.comments);
+  console.log(JSON.stringify(comments, null, 2));
   const bottomSheetRef = useRef<BottomSheet>(null);
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
@@ -63,42 +64,30 @@ export default function Home() {
       <BottomSheetComponent
         bottomSheetRef={bottomSheetRef}
         ViewModel={
-          comments[0]?.post_id ? (
-            <FlatList
-              data={comments}
-              renderItem={({ item }: any) => <CommandList comment={item} />}
-              contentContainerStyle={{
-                gap: 10,
-                maxWidth: 512,
-                alignSelf: "center",
-                width: "100%",
-              }}
-              showsVerticalScrollIndicator={false}
-              ListEmptyComponent={
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text>No comments yet</Text>
-                </View>
-              }
-              onRefresh={fetchPosts}
-              refreshing={loading}
-            />
-          ) : (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text>No comments yet</Text>
-            </View>
-          )
+          <FlatList
+            data={comments}
+            renderItem={({ item }: any) => <CommandList comment={item} />}
+            contentContainerStyle={{
+              gap: 10,
+              maxWidth: 512,
+              alignSelf: "center",
+              width: "100%",
+            }}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text>No comments yet</Text>
+              </View>
+            }
+            onRefresh={fetchPosts}
+            refreshing={loading}
+          />
         }
         commandInput={<CommandInput />}
         minIndex="50%"
