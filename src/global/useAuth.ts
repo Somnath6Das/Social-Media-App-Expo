@@ -1,12 +1,6 @@
 import { create } from "zustand";
 import { Session, User } from "@supabase/supabase-js";
-
-type Auth = {
-  isAuthenticated: boolean;
-  session: Session | null;
-  user?: User | null;
-  isReady: boolean;
-};
+import { AuthContextType } from "../types";
 
 export const useAuth = create((set) => ({
   auth: {
@@ -15,6 +9,8 @@ export const useAuth = create((set) => ({
     user: null,
     isReady: false,
   },
-  updateAuth: (newAuth: Auth) =>
-    set((state: { auth: Auth }) => ({ auth: { ...state.auth, ...newAuth } })),
+  updateAuth: (newAuth: AuthContextType) =>
+    set((state: { auth: AuthContextType }) => ({
+      auth: { ...state.auth, ...newAuth },
+    })),
 }));

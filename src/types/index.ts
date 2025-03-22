@@ -21,8 +21,3 @@ export type EmailType = {
   setEmail: (email: any) => void;
   setOtp: (otp: any) => void;
 };
-
-export type CommentsType = {
-  comments: string;
-  setComments: (postId: any) => void;
-};

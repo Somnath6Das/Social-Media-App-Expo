@@ -12,17 +12,16 @@ import { cld } from "~/src/lib/cloudinary";
 import { AdvancedImage } from "cloudinary-react-native";
 import { supabase } from "../lib/superbase";
 import { useAuth } from "../global/useAuth";
-import { AuthContextType, CommentsType } from "../types";
+import { AuthContextType } from "../types";
 import { sendLikeNotification } from "../notification/messages";
 import { useComments } from "../global/useComments";
 
 export default function PostList({ post, openSheet }: any) {
   const likeCountRef = useRef(post.likes?.[0]?.count);
   const { auth } = useAuth() as AuthContextType;
+  const { setComments } = useComments();
   const [isLiked, setIsLiked] = useState(false);
   const [likeRecord, setLikeRecord] = useState<{ id: string } | null>(null);
-
-  const { setComments } = useComments() as CommentsType;
 
   const [commentCount, setCommentCount] = useState<number | null>(null);
 
@@ -74,21 +73,26 @@ export default function PostList({ post, openSheet }: any) {
   const fatchComments = async () => {
     const { data, count, error } = await supabase
       .from("comments")
-      .select(
-        "id, comment, created_at, post_id, profiles (username, avatar_url)",
-        {
-          count: "exact",
-        }
-      )
+      .select("*, user:profiles(*)", {
+        count: "exact",
+      })
       .eq("post_id", post.id)
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: true });
     if (error) {
       console.log(error);
     }
     // console.log(JSON.stringify(data, null, 2));
     // console.log(count);
     setCommentCount(count);
-    setComments(data);
+
+    const newComment = {
+      comment: data?.[0]?.comment,
+      post_id: data?.[0]?.post_id,
+      username: data?.[0]?.user.username,
+      avatar_url: data?.[0]?.user.avatar_url,
+    };
+
+    setComments([newComment]);
   };
   useEffect(() => {
     fatchComments();

@@ -5,7 +5,7 @@ import { AdvancedImage } from "cloudinary-react-native";
 
 export default function CommentList({ comment }: any) {
   // console.log(JSON.stringify(comment, null, 2));
-  let avatar = cld.image(comment.profiles.avatar_url);
+  let avatar = cld.image(comment.avatar_url);
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }}>
       <View style={{ marginBottom: 18 }}>
@@ -17,7 +17,7 @@ export default function CommentList({ comment }: any) {
             gap: 10,
           }}
         >
-          {comment.profiles.avatar_url ? (
+          {comment.avatar_url ? (
             <AdvancedImage
               cldImg={avatar}
               style={{
@@ -41,7 +41,7 @@ export default function CommentList({ comment }: any) {
           )}
 
           <Text style={{ fontSize: 15, fontWeight: "500" }}>
-            {comment?.profiles?.username || "new user"}
+            {comment?.username || "new user"}
           </Text>
         </View>
         <View style={{ marginLeft: 70, marginRight: 6 }}>

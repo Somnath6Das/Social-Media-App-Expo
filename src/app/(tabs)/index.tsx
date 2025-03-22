@@ -3,24 +3,24 @@ import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import PostList from "~/src/components/PostList";
 import { supabase } from "~/src/lib/superbase";
 import { useAuth } from "~/src/global/useAuth";
-import { AuthContextType, CommentsType } from "~/src/types";
+import { AuthContextType } from "~/src/types";
 import BottomSheet from "@gorhom/bottom-sheet";
 import BottomSheetComponent from "~/src/components/BottomSheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CommandList from "~/src/components/CommandList";
-import { useComments } from "~/src/global/useComments";
+
 import CommandInput from "~/src/components/CommandInput";
+import { useComments } from "~/src/global/useComments";
 
 export default function Home() {
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any[] | null>([]);
-
+  const { comments } = useComments();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
-  const { comments } = useComments() as CommentsType;
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -34,7 +34,7 @@ export default function Home() {
     if (error) {
       Alert.alert("Something went wrong");
     }
-    console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.stringify(data, null, 2));
     setPosts(data);
     setLoading(false);
   };
@@ -63,30 +63,42 @@ export default function Home() {
       <BottomSheetComponent
         bottomSheetRef={bottomSheetRef}
         ViewModel={
-          <FlatList
-            data={comments}
-            renderItem={({ item }: any) => <CommandList comment={item} />}
-            contentContainerStyle={{
-              gap: 10,
-              maxWidth: 512,
-              alignSelf: "center",
-              width: "100%",
-            }}
-            showsVerticalScrollIndicator={false}
-            ListEmptyComponent={
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text>No comments yet</Text>
-              </View>
-            }
-            onRefresh={fetchPosts}
-            refreshing={loading}
-          />
+          comments[0]?.post_id ? (
+            <FlatList
+              data={comments}
+              renderItem={({ item }: any) => <CommandList comment={item} />}
+              contentContainerStyle={{
+                gap: 10,
+                maxWidth: 512,
+                alignSelf: "center",
+                width: "100%",
+              }}
+              showsVerticalScrollIndicator={false}
+              ListEmptyComponent={
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text>No comments yet</Text>
+                </View>
+              }
+              onRefresh={fetchPosts}
+              refreshing={loading}
+            />
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text>No comments yet</Text>
+            </View>
+          )
         }
         commandInput={<CommandInput />}
         minIndex="50%"
