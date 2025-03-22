@@ -14,5 +14,5 @@ type CommentState = {
 
 export const useComments = create<CommentState>((set) => ({
   comments: [],
-  setComments: (comments: any) => set({ comments }),
+  setComments: (comments) => set({ comments }),
 }));
