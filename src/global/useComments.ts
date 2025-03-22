@@ -13,6 +13,6 @@ type CommentState = {
 };
 
 export const useComments = create<CommentState>((set) => ({
-  comments: [], // Ensure default value is an empty array
-  setComments: (newComments) => set(() => ({ comments: newComments || [] })), // Default to an empty array
+  comments: [],
+  setComments: (comments: any) => set({ comments }),
 }));

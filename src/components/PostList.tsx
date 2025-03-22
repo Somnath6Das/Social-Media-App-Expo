@@ -84,15 +84,18 @@ export default function PostList({ post, openSheet }: any) {
     // console.log(JSON.stringify(data, null, 2));
     // console.log(count);
     setCommentCount(count);
-
-    const newComment = {
-      comment: data?.[0]?.comment,
-      post_id: data?.[0]?.post_id,
-      username: data?.[0]?.user.username,
-      avatar_url: data?.[0]?.user.avatar_url,
-    };
-
-    setComments([newComment]);
+    if (data) {
+      data.map((comment) =>
+        setComments([
+          {
+            comment: comment.comment,
+            post_id: comment.post_id,
+            username: comment.user.username,
+            avatar_url: comment.user.avatar_url,
+          },
+        ])
+      );
+    }
   };
   useEffect(() => {
     fatchComments();
