@@ -6,13 +6,12 @@ import { useCommentStore } from "../global/useComments";
 
 const BottomSheetComponent = ({
   bottomSheetRef,
-  ViewModel,
   minIndex,
   maxIndex,
+  ViewModel,
   commandInput = null,
 }: any) => {
   const snapPoints = useMemo(() => [minIndex, maxIndex], []);
-
   const handleSheetChanges = useCallback((index: number) => {
     if (index === -1) {
       useCommentStore.getState().clearComments();

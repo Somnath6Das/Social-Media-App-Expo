@@ -78,5 +78,7 @@ cmake { arguments "-DANDROID_STL=c++_shared" }
 } } 
 }
 
+// groham bottom sheet config in babel.config.js
 
+ plugins: ["react-native-reanimated/plugin"],
 
