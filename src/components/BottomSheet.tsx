@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useRef } from "react";
 import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { FontAwesome } from "@expo/vector-icons";
+import { useCommentStore } from "../global/useComments";
 
 const BottomSheetComponent = ({
   bottomSheetRef,
@@ -14,10 +15,14 @@ const BottomSheetComponent = ({
 
   const handleSheetChanges = useCallback((index: number) => {
     if (index === -1) {
+      useCommentStore.getState().clearComments();
       bottomSheetRef.current?.close();
     }
   }, []);
-  const handleClosePress = () => bottomSheetRef.current?.close();
+  const handleClosePress = () => {
+    useCommentStore.getState().clearComments();
+    bottomSheetRef.current?.close();
+  };
 
   // renders
   return (

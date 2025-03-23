@@ -17,7 +17,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any[] | null>([]);
   const comments = useCommentStore((state) => state.comments);
-  console.log(JSON.stringify(comments, null, 2));
+  // console.log(JSON.stringify(comments, null, 2));
   const bottomSheetRef = useRef<BottomSheet>(null);
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();

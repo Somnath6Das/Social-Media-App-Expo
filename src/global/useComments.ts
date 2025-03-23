@@ -23,9 +23,11 @@ interface Comment {
 interface CommentStore {
   comments: Comment[];
   setComments: (newComments: Comment[]) => void;
+  clearComments: () => void;
 }
 
 export const useCommentStore = create<CommentStore>((set) => ({
   comments: [],
   setComments: (newComments) => set({ comments: newComments }),
+  clearComments: () => set({ comments: [] }),
 }));
