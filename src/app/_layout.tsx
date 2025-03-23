@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { ThemeProvider } from "../theme/ThemeProvider";
 import { useTheme } from "../theme/ThemeProvider";
-import { ActivityIndicator, AppState, View } from "react-native";
+import { ActivityIndicator, Alert, AppState, View } from "react-native";
 import { supabase } from "../lib/superbase";
 import { useEffect } from "react";
 import { useAuth } from "../global/useAuth";
@@ -18,6 +18,7 @@ AppState.addEventListener("change", (state) => {
 export default function RootLayout() {
   const theme = useTheme();
   const { auth, updateAuth } = useAuth() as AuthContextType;
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       updateAuth({
@@ -44,6 +45,7 @@ export default function RootLayout() {
       </View>
     );
   }
+
   return (
     <ThemeProvider>
       <Stack

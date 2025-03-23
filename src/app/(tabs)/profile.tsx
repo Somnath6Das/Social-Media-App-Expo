@@ -36,6 +36,7 @@ export default function Profile() {
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
+
   useEffect(() => {
     getProfile();
   }, []);
@@ -53,6 +54,7 @@ export default function Profile() {
     if (error) {
       Alert.alert("Failed to fetch profile");
     }
+    // console.log(JSON.stringify(currentUser, null, 2));
 
     // console.log(data);
     setUsername(data.username);
@@ -83,6 +85,7 @@ export default function Profile() {
       .eq("id", auth.user.id);
 
     setLoading(false);
+
     if (error) {
       Alert.alert("Failed to update profile");
     }
