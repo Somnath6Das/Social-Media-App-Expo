@@ -9,16 +9,20 @@ import {
   View,
 } from "react-native";
 import { useAuth } from "../global/useAuth";
-import { AuthContextType } from "../types";
+import { AuthContextType, PostIdType } from "../types";
 import { supabase } from "../lib/superbase";
 import { cld } from "../lib/cloudinary";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "cloudinary-react-native";
+import { usePostId } from "../global/usePostId";
 
 export default function CommandInput() {
   const [text, onChangeText] = useState("");
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [avatar, setAvatar] = useState("");
+  const { postId } = usePostId() as PostIdType;
+
+  console.log(postId);
 
   const getProfile = async () => {
     if (!auth.user?.id) {
@@ -33,7 +37,7 @@ export default function CommandInput() {
       Alert.alert("Failed to fetch profile");
     }
     setAvatar(data.avatar_url);
-    console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.stringify(data, null, 2));
   };
   useEffect(() => {
     getProfile();

@@ -21,3 +21,7 @@ export type EmailType = {
   setEmail: (email: any) => void;
   setOtp: (otp: any) => void;
 };
+export type PostIdType = {
+  postId: string;
+  setPostId: (postId: any) => void;
+};
