@@ -56,6 +56,7 @@ export default function PostList({ post, openSheet }: any) {
     if (data) {
       // send notification to the owner of that post
       sendLikeNotification(data[0]);
+      // console.log(JSON.stringify(data[0], null, 2));
       setLikeRecord(data[0]);
     }
   };

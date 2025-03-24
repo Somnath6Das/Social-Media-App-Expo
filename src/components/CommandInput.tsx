@@ -22,7 +22,7 @@ export default function CommandInput() {
   const [avatar, setAvatar] = useState("");
   const { postId } = usePostId() as PostIdType;
 
-  console.log(postId);
+  // console.log(JSON.stringify(postId, null, 2));
 
   const getProfile = async () => {
     if (!auth.user?.id) {
@@ -45,6 +45,17 @@ export default function CommandInput() {
 
   let remoteCldImage = cld.image(avatar);
   remoteCldImage.resize(thumbnail().width(300).height(300));
+
+  const makeComment = async () => {
+    const { data, error } = await supabase
+      .from("comments")
+      .insert([{ user_id: auth.user?.id, post_id: postId, comment: text }])
+      .select();
+    console.log(auth.user?.id);
+    console.log(postId);
+    console.log(text);
+    console.log(JSON.stringify(error, null, 2));
+  };
 
   return (
     <View
@@ -77,7 +88,7 @@ export default function CommandInput() {
         value={text}
         keyboardType="default"
       />
-      <TouchableOpacity style={{ marginLeft: "auto" }}>
+      <TouchableOpacity style={{ marginLeft: "auto" }} onPress={makeComment}>
         <Ionicons name="send" size={20} color="#755fff" />
       </TouchableOpacity>
     </View>
