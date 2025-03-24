@@ -1,5 +1,4 @@
 import { Button, Pressable, Text, TouchableOpacity, View } from "react-native";
-import Switch from "expo-dark-mode-switch";
 import { useState } from "react";
 import { Entypo } from "@expo/vector-icons";
 
@@ -13,11 +12,6 @@ export default function ColorModeSettings() {
           flexDirection: "row",
         }}
       >
-        <Switch
-          value={value}
-          onChange={(value) => setValue(value)}
-          style={{}}
-        />
         <Text
           style={{
             fontSize: 20,

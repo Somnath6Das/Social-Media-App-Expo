@@ -11,6 +11,7 @@ import CommandList from "~/src/components/CommandList";
 
 import CommandInput from "~/src/components/CommentInput";
 import { useCommentStore } from "~/src/global/useComments";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   const isMounted = useRef(false);
@@ -52,7 +53,7 @@ export default function Home() {
   }, []);
 
   return (
-    <GestureHandlerRootView>
+    <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         data={posts}
         renderItem={({ item }: any) => (
@@ -100,6 +101,6 @@ export default function Home() {
         minIndex="50%"
         maxIndex="70%"
       />
-    </GestureHandlerRootView>
+    </SafeAreaView>
   );
 }

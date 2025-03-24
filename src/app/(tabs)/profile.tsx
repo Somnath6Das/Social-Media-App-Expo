@@ -23,8 +23,10 @@ import { Ionicons } from "@expo/vector-icons";
 import BottomSheetComponent from "~/src/components/BottomSheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 import ColorModeSettings from "~/src/components/ColorModeSettings";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Profile() {
+  const isMounted = useRef(false);
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [image, setImage] = useState<string | undefined>("");
   const [remoteImage, setRemoteImage] = useState<string | null>(null);
@@ -38,7 +40,11 @@ export default function Profile() {
   }, []);
 
   useEffect(() => {
+    isMounted.current = true;
     getProfile();
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   const getProfile = async () => {
@@ -112,7 +118,7 @@ export default function Profile() {
     remoteCldImage.resize(thumbnail().width(300).height(300));
   }
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <TouchableOpacity
         onPress={openSheet}
         style={{ alignItems: "flex-end", marginRight: 15, marginTop: 15 }}
@@ -178,7 +184,7 @@ export default function Profile() {
         minIndex="25%"
         maxIndex="50%"
       />
-    </GestureHandlerRootView>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
