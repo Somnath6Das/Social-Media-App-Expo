@@ -36,7 +36,9 @@ export default function CommandInput() {
     if (error) {
       Alert.alert("Failed to fetch profile");
     }
+    onChangeText("");
     setAvatar(data.avatar_url);
+
     // console.log(JSON.stringify(data, null, 2));
   };
   useEffect(() => {
@@ -51,10 +53,8 @@ export default function CommandInput() {
       .from("comments")
       .insert([{ user_id: auth.user?.id, post_id: postId, comment: text }])
       .select();
-    console.log(auth.user?.id);
-    console.log(postId);
-    console.log(text);
-    console.log(JSON.stringify(error, null, 2));
+
+    // console.log(JSON.stringify(error, null, 2));
   };
 
   return (

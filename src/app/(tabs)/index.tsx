@@ -9,7 +9,7 @@ import BottomSheetComponent from "~/src/components/BottomSheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CommandList from "~/src/components/CommandList";
 
-import CommandInput from "~/src/components/CommandInput";
+import CommandInput from "~/src/components/CommentInput";
 import { useCommentStore } from "~/src/global/useComments";
 
 export default function Home() {
