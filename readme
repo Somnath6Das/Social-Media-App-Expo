@@ -82,3 +82,15 @@ cmake { arguments "-DANDROID_STL=c++_shared" }
 
  plugins: ["react-native-reanimated/plugin"],
 
+// local apk build
+// eas.json
+"build":{
+  "production": {
+      "android": {
+        "buildType": "apk"
+      }
+    }
+}
+
+eas build --profile production --platform android --local
+

@@ -15,6 +15,7 @@ import { cld } from "../lib/cloudinary";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "cloudinary-react-native";
 import { usePostId } from "../global/usePostId";
+import { sendCommentNotification } from "../notification/comment_notification";
 
 export default function CommandInput() {
   const [text, onChangeText] = useState("");
@@ -57,6 +58,9 @@ export default function CommandInput() {
     onChangeText("");
     setLoading(false);
     // console.log(JSON.stringify(error, null, 2));
+    if (data) {
+      sendCommentNotification(data[0]);
+    }
   };
 
   return (

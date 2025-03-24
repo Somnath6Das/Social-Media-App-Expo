@@ -13,7 +13,7 @@ import { AdvancedImage } from "cloudinary-react-native";
 import { supabase } from "../lib/superbase";
 import { useAuth } from "../global/useAuth";
 import { AuthContextType, PostIdType } from "../types";
-import { sendLikeNotification } from "../notification/messages";
+import { sendLikeNotification } from "../notification/like_notification";
 import { useCommentStore } from "../global/useComments";
 import { usePostId } from "../global/usePostId";
 
