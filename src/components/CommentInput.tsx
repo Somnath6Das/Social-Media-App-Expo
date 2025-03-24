@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Alert,
   Image,
@@ -18,6 +18,7 @@ import { usePostId } from "../global/usePostId";
 import { sendCommentNotification } from "../notification/comment_notification";
 
 export default function CommandInput() {
+  const isMounted = useRef(false);
   const [text, onChangeText] = useState("");
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [avatar, setAvatar] = useState("");
@@ -43,7 +44,13 @@ export default function CommandInput() {
     // console.log(JSON.stringify(data, null, 2));
   };
   useEffect(() => {
-    getProfile();
+    isMounted.current = true;
+    if (isMounted.current) {
+      getProfile();
+    }
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   let remoteCldImage = cld.image(avatar);

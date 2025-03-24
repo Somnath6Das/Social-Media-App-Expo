@@ -3,7 +3,7 @@ import { ThemeProvider } from "../theme/ThemeProvider";
 import { useTheme } from "../theme/ThemeProvider";
 import { ActivityIndicator, Alert, AppState, View } from "react-native";
 import { supabase } from "../lib/superbase";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAuth } from "../global/useAuth";
 import { AuthContextType } from "../types";
 
@@ -16,27 +16,34 @@ AppState.addEventListener("change", (state) => {
 });
 
 export default function RootLayout() {
+  const isMounted = useRef(false);
   const theme = useTheme();
   const { auth, updateAuth } = useAuth() as AuthContextType;
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      updateAuth({
-        session,
-        isReady: true,
-        user: session?.user,
-        isAuthenticated: !!session?.user,
+    isMounted.current = true;
+    if (isMounted.current) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        updateAuth({
+          session,
+          isReady: true,
+          user: session?.user,
+          isAuthenticated: !!session?.user,
+        });
       });
-    });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      updateAuth({
-        session,
-        isReady: true,
-        user: session?.user,
-        isAuthenticated: !!session?.user,
+      supabase.auth.onAuthStateChange((_event, session) => {
+        updateAuth({
+          session,
+          isReady: true,
+          user: session?.user,
+          isAuthenticated: !!session?.user,
+        });
       });
-    });
+    }
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
   if (!auth.isReady) {
     return (

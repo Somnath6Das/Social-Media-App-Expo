@@ -18,6 +18,7 @@ import { useCommentStore } from "../global/useComments";
 import { usePostId } from "../global/usePostId";
 
 export default function PostList({ post, openSheet }: any) {
+  const isMounted = useRef(false);
   const likeCountRef = useRef(post.likes?.[0]?.count);
   const { auth } = useAuth() as AuthContextType;
 
@@ -92,7 +93,13 @@ export default function PostList({ post, openSheet }: any) {
     }
   };
   useEffect(() => {
-    fatchComments();
+    isMounted.current = true;
+    if (isMounted.current) {
+      fatchComments();
+    }
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   return (

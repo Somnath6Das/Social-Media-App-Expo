@@ -13,6 +13,7 @@ import CommandInput from "~/src/components/CommentInput";
 import { useCommentStore } from "~/src/global/useComments";
 
 export default function Home() {
+  const isMounted = useRef(false);
   const { auth, updateAuth } = useAuth() as AuthContextType;
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<any[] | null>([]);
@@ -41,7 +42,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchPosts();
+    isMounted.current = true;
+    if (isMounted.current) {
+      fetchPosts();
+    }
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   return (
