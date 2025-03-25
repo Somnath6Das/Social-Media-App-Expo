@@ -6,6 +6,7 @@ import { supabase } from "../lib/superbase";
 import { useEffect, useRef } from "react";
 import { useAuth } from "../global/useAuth";
 import { AuthContextType } from "../types";
+import NetworkAware from "../components/networkAware";
 
 AppState.addEventListener("change", (state) => {
   if (state === "active") {
@@ -47,9 +48,13 @@ export default function RootLayout() {
   }, []);
   if (!auth.isReady) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#ecaf0a" />
-      </View>
+      <NetworkAware>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" color="#ecaf0a" />
+        </View>
+      </NetworkAware>
     );
   }
 

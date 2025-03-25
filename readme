@@ -82,6 +82,11 @@ cmake { arguments "-DANDROID_STL=c++_shared" }
 
  plugins: ["react-native-reanimated/plugin"],
 
+ // netInfo for ios
+ "entitlements": {
+      "com.apple.developer.networking.wifi-info": true
+    }
+
 // local apk build
 // eas.json
 "build":{
@@ -97,4 +102,5 @@ eas build --profile production --platform android --local
 
 // run build emulator
 npx expo run:android
+npx expo run:ios
 
