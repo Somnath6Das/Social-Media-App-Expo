@@ -16,6 +16,7 @@ import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "cloudinary-react-native";
 import { usePostId } from "../global/usePostId";
 import { sendCommentNotification } from "../notification/comment_notification";
+import { fatchComments } from "../func/fetchComments";
 
 export default function CommandInput() {
   const isMounted = useRef(false);
@@ -66,6 +67,8 @@ export default function CommandInput() {
     setLoading(false);
     // console.log(JSON.stringify(error, null, 2));
     if (data) {
+      let postidcmt = data[0]?.post_id;
+      fatchComments(postidcmt);
       sendCommentNotification(data[0]);
     }
   };

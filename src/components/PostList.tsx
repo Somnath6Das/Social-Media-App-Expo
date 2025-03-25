@@ -16,6 +16,7 @@ import { AuthContextType, PostIdType } from "../types";
 import { sendLikeNotification } from "../notification/like_notification";
 import { useCommentStore } from "../global/useComments";
 import { usePostId } from "../global/usePostId";
+import { fatchComments } from "../func/fetchComments";
 
 export default function PostList({ post, openSheet }: any) {
   const isMounted = useRef(false);
@@ -73,29 +74,16 @@ export default function PostList({ post, openSheet }: any) {
       }
     }
   };
-
-  const fatchComments = async () => {
-    const { data, count, error } = await supabase
-      .from("comments")
-      .select("*, user:profiles(*)", {
-        count: "exact",
-      })
-      .eq("post_id", post.id)
-      .order("created_at", { ascending: true });
-    if (error) {
-      console.log(error);
-    }
-    // console.log(JSON.stringify(data, null, 2));
-    // console.log(count);
-    setCommentCount(count);
-    if (data) {
-      useCommentStore.getState().setComments(data);
-    }
+  const commentByPostId = () => {
+    fatchComments(post.id).then(({ data, count, error }) => {
+      setCommentCount(count);
+    });
   };
+
   useEffect(() => {
     isMounted.current = true;
     if (isMounted.current) {
-      fatchComments();
+      commentByPostId();
     }
     return () => {
       isMounted.current = false;
@@ -172,7 +160,7 @@ export default function PostList({ post, openSheet }: any) {
           <TouchableOpacity
             onPress={() => {
               setPostId(post.id);
-              fatchComments();
+              commentByPostId();
               openSheet();
             }}
           >
