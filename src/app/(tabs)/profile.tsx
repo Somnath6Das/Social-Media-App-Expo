@@ -230,28 +230,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     alignItems: "center",
-  },
-  profileImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 104,
-    backgroundColor: "#CBD5E1",
-    borderColor: "#ffffff",
-    borderWidth: 2,
-  },
-  profilePlaceholder: {
-    width: 150,
-    height: 150,
-    borderRadius: 104,
-    backgroundColor: "#CBD5E1",
-    alignSelf: "center",
-  },
-  changeText: {
-    color: "#3B82F6", // text-blue-500
-    fontWeight: "600",
-    marginVertical: 10,
   },
   inputContainer: {
     alignItems: "center",
