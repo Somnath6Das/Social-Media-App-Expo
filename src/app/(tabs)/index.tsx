@@ -12,6 +12,7 @@ import CommandList from "~/src/components/CommandList";
 import CommandInput from "~/src/components/CommentInput";
 import { useCommentStore } from "~/src/global/useComments";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "~/src/theme/ThemeProvider";
 
 export default function Home() {
   const isMounted = useRef(false);
@@ -21,6 +22,7 @@ export default function Home() {
   const comments = useCommentStore((state) => state.comments);
   // console.log(JSON.stringify(comments, null, 2));
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const theme = useTheme();
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
@@ -53,7 +55,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: theme.cardback }}>
       <FlatList
         data={posts}
         renderItem={({ item }: any) => (
@@ -101,6 +103,6 @@ export default function Home() {
         minIndex="50%"
         maxIndex="70%"
       />
-    </>
+    </View>
   );
 }

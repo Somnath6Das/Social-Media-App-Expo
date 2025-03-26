@@ -32,7 +32,14 @@ export default function CustomButton({
           style={{ alignSelf: "center" }}
         />
       ) : (
-        <Text style={{ alignSelf: "center", fontSize: 18, color: theme.text }}>
+        <Text
+          style={{
+            alignSelf: "center",
+            fontSize: 18,
+            color: theme.text,
+            fontWeight: "500",
+          }}
+        >
           {title}
         </Text>
       )}

@@ -41,7 +41,7 @@ export default function Layout() {
                 <MaterialCommunityIcons
                   name="home-circle"
                   size={focused ? 30 : 25}
-                  color={focused ? theme.primary : "#525252"}
+                  color={focused ? theme.primary : theme.text}
                 />
               ),
             }}
@@ -54,7 +54,7 @@ export default function Layout() {
                 <FontAwesome
                   name="plus-circle"
                   size={focused ? 30 : 25}
-                  color={focused ? theme.primary : "#525252"}
+                  color={focused ? theme.primary : theme.text}
                 />
               ),
             }}
@@ -67,7 +67,7 @@ export default function Layout() {
                 <FontAwesome
                   name="user-circle-o"
                   size={focused ? 28 : 23}
-                  color={focused ? theme.primary : "#525252"}
+                  color={focused ? theme.primary : theme.text}
                 />
               ),
             }}

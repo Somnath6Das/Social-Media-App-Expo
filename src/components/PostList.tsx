@@ -17,6 +17,7 @@ import { sendLikeNotification } from "../notification/like_notification";
 import { useCommentStore } from "../global/useComments";
 import { usePostId } from "../global/usePostId";
 import { fatchComments } from "../func/fetchComments";
+import { useTheme } from "../theme/ThemeProvider";
 
 export default function PostList({ post, openSheet }: any) {
   const isMounted = useRef(false);
@@ -28,7 +29,7 @@ export default function PostList({ post, openSheet }: any) {
 
   const [commentCount, setCommentCount] = useState<number | null>(null);
   const { setPostId } = usePostId() as PostIdType;
-
+  const theme = useTheme();
   let avatar = cld.image(post.user.avatar_url);
 
   useEffect(() => {
@@ -91,14 +92,15 @@ export default function PostList({ post, openSheet }: any) {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
-      {/* Header */}
+    <View style={{ flex: 1, backgroundColor: theme.cardfore }}>
       <View
         style={{
           flexDirection: "row",
           alignItems: "center",
-          gap: 5,
-          margin: 3,
+          marginLeft: 10,
+          marginTop: 10,
+          gap: 8,
+          marginBottom: 16,
         }}
       >
         {post.user.avatar_url ? (
@@ -109,30 +111,38 @@ export default function PostList({ post, openSheet }: any) {
               height: 40,
               aspectRatio: 1,
               borderRadius: 50,
-              marginLeft: 10,
             }}
           />
         ) : (
           <Image
             source={require("~/assets/photos/user.png")}
-            style={{ width: 50, height: 50, aspectRatio: 1, borderRadius: 50 }}
+            style={{
+              width: 40,
+              height: 40,
+              aspectRatio: 1,
+              borderRadius: 50,
+            }}
           />
         )}
-        <Text style={{ fontSize: 18 }}>{post.user.username || "new user"}</Text>
-      </View>
-      {post.caption && (
-        <View style={{ marginLeft: 57, marginBottom: 20 }}>
-          <Text
-            style={{
-              fontWeight: "semibold",
-              fontSize: 16,
-              color: "#605f5f",
-            }}
-          >
-            {post.caption}
+        <View style={{ flexDirection: "column", gap: 2 }}>
+          <Text style={{ fontSize: 16 }}>
+            {post.user.username || "new user"}
           </Text>
+          {post.caption && (
+            <View>
+              <Text
+                style={{
+                  fontWeight: "semibold",
+                  fontSize: 16,
+                  color: "#605f5f",
+                }}
+              >
+                {post.caption}
+              </Text>
+            </View>
+          )}
         </View>
-      )}
+      </View>
 
       <PostContent post={post} />
       <View
@@ -172,7 +182,9 @@ export default function PostList({ post, openSheet }: any) {
         <Feather name="bookmark" size={20} style={{ marginRight: 10 }} />
       </View>
 
-      <View style={{ flexDirection: "row", marginTop: 5, gap: 1 }}>
+      <View
+        style={{ flexDirection: "row", marginTop: 5, gap: 1, marginBottom: 10 }}
+      >
         <Text style={{ fontWeight: "semibold", marginLeft: 7 }}>
           Likes {likeCountRef.current || 0}
         </Text>

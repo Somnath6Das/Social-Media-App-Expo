@@ -8,7 +8,7 @@ export default function CommentList({ comment }: any) {
   let avatar = cld.image(comment.user.avatar_url);
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }}>
-      <View style={{ marginBottom: 18 }}>
+      <View style={{ marginBottom: 10 }}>
         <View
           style={{
             flexDirection: "row",
@@ -39,13 +39,12 @@ export default function CommentList({ comment }: any) {
               }}
             />
           )}
-
-          <Text style={{ fontSize: 15, fontWeight: "500" }}>
-            {comment.user.username || "new user"}
-          </Text>
-        </View>
-        <View style={{ marginLeft: 70, marginRight: 6 }}>
-          <Text>{comment.comment}</Text>
+          <View style={{ gap: 4 }}>
+            <Text style={{ fontSize: 15, fontWeight: "500" }}>
+              {comment.user.username || "new user"}
+            </Text>
+            <Text>{comment.comment}</Text>
+          </View>
         </View>
       </View>
     </ScrollView>

@@ -136,9 +136,9 @@ export default function Profile() {
               width: 150,
               height: 150,
               borderRadius: 104,
-              backgroundColor: "#CBD5E1",
-              borderColor: theme.primary,
-              borderWidth: 3,
+              backgroundColor: theme.content,
+              borderColor: theme.text,
+              borderWidth: 4,
             }}
           />
         ) : remoteCldImage ? (
@@ -148,9 +148,9 @@ export default function Profile() {
               width: 150,
               height: 150,
               borderRadius: 104,
-              backgroundColor: "#CBD5E1",
-              borderColor: theme.primary,
-              borderWidth: 3,
+              backgroundColor: theme.content,
+              borderColor: theme.text,
+              borderWidth: 4,
             }}
           />
         ) : (
