@@ -6,12 +6,14 @@ import CustomButton from "~/src/components/CustomButton";
 import InputField from "~/src/components/InputField";
 import { useEmail } from "~/src/global/useEmail";
 import { supabase } from "~/src/lib/superbase";
+import { useTheme } from "~/src/theme/ThemeProvider";
 import { EmailType } from "~/src/types";
 
 export default function VerifyEmail() {
   const { heading } = useLocalSearchParams();
   const { email, setEmail } = useEmail() as EmailType;
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
   const emailVerify = async () => {
     setLoading(true);
     if (!email) {
@@ -48,10 +50,17 @@ export default function VerifyEmail() {
             marginBottom: 35,
           }}
         />
-        <Text style={{ alignSelf: "center", marginVertical: 30, fontSize: 19 }}>
+        <Text
+          style={{
+            alignSelf: "center",
+            marginVertical: 20,
+            fontSize: 19,
+            color: theme.text,
+          }}
+        >
           {heading}
         </Text>
-        <View style={{ width: "100%", alignItems: "center", gap: 90 }}>
+        <View style={{ width: "100%", alignItems: "center", gap: 20 }}>
           <InputField
             title="Email"
             value={email}

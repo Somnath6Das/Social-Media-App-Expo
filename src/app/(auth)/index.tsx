@@ -13,6 +13,7 @@ import CustomButton from "~/src/components/CustomButton";
 import InputField from "~/src/components/InputField";
 import { useAuth } from "~/src/global/useAuth";
 import { supabase } from "~/src/lib/superbase";
+import { useTheme } from "~/src/theme/ThemeProvider";
 import { AuthContextType } from "~/src/types";
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
     email: "",
     password: "",
   });
-
+  const theme = useTheme();
   const [errorInfo, setErrorInfo] = useState(false);
   const [loading, setLoading] = useState(false);
   const signInWithEmail = async () => {
@@ -95,10 +96,12 @@ export default function Home() {
             marginTop: 20,
           }}
         >
-          <Text style={{ fontSize: 16 }}>Don't have an account ?</Text>
+          <Text style={{ fontSize: 16, color: theme.text }}>
+            Don't have an account ?
+          </Text>
           <Link
             href="/verify_email?heading=Sign up for new profile"
-            style={{ fontSize: 16, color: "#ecaf0a" }}
+            style={{ fontSize: 16, color: theme.primary, fontWeight: "700" }}
           >
             Sign up
           </Link>

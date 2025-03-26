@@ -39,6 +39,7 @@ export default function SetPassword() {
     });
     setLoading(false);
     if (updateError) {
+      setLoading(false);
       Alert.alert(updateError?.message);
       return;
     }

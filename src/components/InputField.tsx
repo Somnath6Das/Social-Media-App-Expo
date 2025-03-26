@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 
 import { KeyboardTypeOptions } from "react-native";
 import { useTheme } from "../theme/ThemeProvider";
+import { Feather } from "@expo/vector-icons";
 
 type FormField = {
   title: string;
@@ -77,15 +78,11 @@ const InputField = ({
             style={{ justifyContent: "center" }}
             onPress={() => setShowPassword(!showPassword)}
           >
-            <Image
-              source={
-                !showPassword
-                  ? require("~/assets/photos/eye.png")
-                  : require("~/assets/photos/eye-hide.png")
-              }
-              style={{ width: 24, height: 24 }}
-              resizeMode="contain"
-            />
+            {!showPassword ? (
+              <Feather name="eye" size={22} color={theme.text} />
+            ) : (
+              <Feather name="eye-off" size={22} color={theme.text} />
+            )}
           </TouchableOpacity>
         )}
       </View>

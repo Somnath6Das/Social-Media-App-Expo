@@ -6,10 +6,11 @@ import { EmailType } from "~/src/types";
 import { useEmail } from "~/src/global/useEmail";
 import { router } from "expo-router";
 import { useState } from "react";
+import { useTheme } from "~/src/theme/ThemeProvider";
 
 export default function VerifyOtp() {
   const { otp, setOtp } = useEmail() as EmailType;
-
+  const theme = useTheme();
   const otpVerify = () => {
     if (otp.length === 6) {
       router.push("/set_password");
@@ -37,9 +38,11 @@ export default function VerifyOtp() {
           }}
         />
         <View style={{ width: "100%", alignItems: "center" }}>
-          <Text style={{ fontSize: 16 }}>Put your otp here.</Text>
+          <Text style={{ fontSize: 19, marginBottom: 14, color: theme.text }}>
+            Put your otp here.
+          </Text>
           <OtpInput
-            focusColor="#FFC300"
+            focusColor={theme.primary}
             type="numeric"
             numberOfDigits={6}
             onTextChange={(text) => setOtp(text)}
@@ -56,6 +59,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     gap: 8,
+
     alignItems: "center",
     height: 10,
     width: 10,

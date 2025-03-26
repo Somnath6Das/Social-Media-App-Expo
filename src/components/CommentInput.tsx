@@ -17,6 +17,7 @@ import { AdvancedImage } from "cloudinary-react-native";
 import { usePostId } from "../global/usePostId";
 import { sendCommentNotification } from "../notification/comment_notification";
 import { fatchComments } from "../func/fetchComments";
+import { useTheme } from "../theme/ThemeProvider";
 
 export default function CommandInput() {
   const isMounted = useRef(false);
@@ -26,7 +27,7 @@ export default function CommandInput() {
   const { postId } = usePostId() as PostIdType;
   const [loading, setLoading] = useState(false);
   // console.log(JSON.stringify(postId, null, 2));
-
+  const theme = useTheme();
   const getProfile = async () => {
     if (!auth.user?.id) {
       return;
@@ -79,7 +80,7 @@ export default function CommandInput() {
         height: 45,
         margin: 12,
         borderWidth: 2,
-        borderColor: "#755fff",
+        borderColor: theme.primary,
         padding: 10,
         borderRadius: 10,
         flexDirection: "row",
@@ -112,7 +113,7 @@ export default function CommandInput() {
         <Ionicons
           name="send"
           size={20}
-          color={loading ? "#a9a9a9 " : "#755fff"}
+          color={loading ? "#a9a9a9" : theme.primary}
         />
       </TouchableOpacity>
     </View>
