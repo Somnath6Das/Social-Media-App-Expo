@@ -46,7 +46,7 @@ const BottomSheetComponent = ({
           onPress={handleClosePress}
           style={{ alignItems: "flex-end", marginRight: 20 }}
         >
-          <FontAwesome name="close" size={24} color={theme.text} />
+          <FontAwesome name="close" size={20} color={theme.text} />
         </TouchableOpacity>
         <View style={styles.modelContent}>
           {ViewModel}

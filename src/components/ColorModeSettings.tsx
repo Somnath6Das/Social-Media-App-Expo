@@ -24,11 +24,15 @@ export default function ColorModeSettings() {
   };
 
   return (
-    <View style={{ margin: 12 }}>
+    <View style={{ margin: 12, marginTop: 20 }}>
       <TouchableOpacity
         onPress={() => setIsDarkTheme((prevValue) => !prevValue)}
         style={{
           flexDirection: "row",
+          width: "100%",
+          height: 40,
+          backgroundColor: theme.content,
+          borderRadius: 16,
         }}
       >
         <Switch
@@ -37,6 +41,7 @@ export default function ColorModeSettings() {
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleTheme}
           value={isDarkTheme}
+          style={{ alignSelf: "center", marginLeft: 7 }}
         />
         <Text
           style={{
@@ -54,21 +59,30 @@ export default function ColorModeSettings() {
         style={{
           marginTop: 16,
           flexDirection: "row",
-          gap: 36,
+
           justifyContent: "flex-start",
           borderRadius: 16,
           width: "100%",
           height: 40,
-          backgroundColor: "#e5e5e5",
+          backgroundColor: theme.content,
         }}
       >
         <Entypo
           name="ccw"
           size={30}
           style={{ alignSelf: "center", marginLeft: 18 }}
-          color="#666379"
+          color={theme.text}
         />
-        <Text style={{ fontSize: 20, alignSelf: "center" }}>System Mode</Text>
+        <Text
+          style={{
+            fontSize: 20,
+            alignSelf: "center",
+            color: theme.text,
+            marginLeft: 26,
+          }}
+        >
+          System Mode
+        </Text>
       </Pressable>
     </View>
   );
