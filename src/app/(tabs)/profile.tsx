@@ -118,7 +118,7 @@ export default function Profile() {
     remoteCldImage.resize(thumbnail().width(300).height(300));
   }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <>
       <TouchableOpacity
         onPress={openSheet}
         style={{ alignItems: "flex-end", marginRight: 15, marginTop: 15 }}
@@ -184,7 +184,7 @@ export default function Profile() {
         minIndex="25%"
         maxIndex="50%"
       />
-    </SafeAreaView>
+    </>
   );
 }
 const styles = StyleSheet.create({

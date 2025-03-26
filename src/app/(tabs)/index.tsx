@@ -53,7 +53,7 @@ export default function Home() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <>
       <FlatList
         data={posts}
         renderItem={({ item }: any) => (
@@ -101,6 +101,6 @@ export default function Home() {
         minIndex="50%"
         maxIndex="70%"
       />
-    </SafeAreaView>
+    </>
   );
 }
