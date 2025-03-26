@@ -24,7 +24,7 @@ export default function ColorModeSettings() {
   };
 
   return (
-    <View style={{ margin: 12, backgroundColor: theme.background }}>
+    <View style={{ margin: 12 }}>
       <TouchableOpacity
         onPress={() => setIsDarkTheme((prevValue) => !prevValue)}
         style={{
@@ -32,8 +32,8 @@ export default function ColorModeSettings() {
         }}
       >
         <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isDarkTheme ? "#f5dd4b" : "#f4f3f4"}
+          trackColor={{ false: "#767577", true: "#f4f3f4" }}
+          thumbColor={isDarkTheme ? "#767577" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleTheme}
           value={isDarkTheme}
@@ -43,6 +43,7 @@ export default function ColorModeSettings() {
             fontSize: 20,
             alignSelf: "center",
             marginLeft: 16,
+            color: theme.text,
           }}
         >
           {isDarkTheme ? "Dark Mode" : "Light Mode"}

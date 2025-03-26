@@ -1,13 +1,14 @@
 export const lightTheme = {
   background: "#ffffff",
   text: "#000000",
-  primary: "#007AFF",
+  primary: "#4d12ea",
 };
 
 export const darkTheme = {
-  background: "#454545",
+  background: "#353535",
+
   text: "#ffffff",
-  primary: "#0A84FF",
+  primary: "#4d12ea ",
 };
 
 export const getTheme = (colorScheme: "light" | "dark") => {
