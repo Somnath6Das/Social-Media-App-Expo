@@ -1,4 +1,5 @@
 import { ActivityIndicator, Pressable, Text } from "react-native";
+import { useTheme } from "../theme/ThemeProvider";
 
 type ButtonProps = {
   title: string;
@@ -11,12 +12,13 @@ export default function CustomButton({
   onPress,
   loading = false,
 }: ButtonProps) {
+  const theme = useTheme();
   return (
     <Pressable
       onPress={onPress}
       disabled={loading}
       style={{
-        backgroundColor: "#FFC300",
+        backgroundColor: theme.primary,
         marginTop: 10,
         width: "90%",
         paddingVertical: 15,
@@ -30,7 +32,9 @@ export default function CustomButton({
           style={{ alignSelf: "center" }}
         />
       ) : (
-        <Text style={{ alignSelf: "center", fontSize: 18 }}>{title}</Text>
+        <Text style={{ alignSelf: "center", fontSize: 18, color: theme.text }}>
+          {title}
+        </Text>
       )}
     </Pressable>
   );

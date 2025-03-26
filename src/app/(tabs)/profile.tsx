@@ -24,6 +24,7 @@ import BottomSheetComponent from "~/src/components/BottomSheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 import ColorModeSettings from "~/src/components/ColorModeSettings";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "~/src/theme/ThemeProvider";
 
 export default function Profile() {
   const isMounted = useRef(false);
@@ -35,6 +36,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const theme = useTheme();
   const openSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
@@ -118,24 +120,62 @@ export default function Profile() {
     remoteCldImage.resize(thumbnail().width(300).height(300));
   }
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: theme.background }}>
       <TouchableOpacity
         onPress={openSheet}
         style={{ alignItems: "flex-end", marginRight: 15, marginTop: 15 }}
       >
-        <Ionicons name="settings-sharp" size={26} color="black" />
+        <Ionicons name="settings-sharp" size={26} color={theme.text} />
       </TouchableOpacity>
       <View style={styles.container}>
         {image ? (
           // local picked image
-          <Image source={{ uri: image }} style={styles.profileImage} />
+          <Image
+            source={{ uri: image }}
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 104,
+              backgroundColor: "#CBD5E1",
+              borderColor: theme.primary,
+              borderWidth: 3,
+            }}
+          />
         ) : remoteCldImage ? (
-          <AdvancedImage cldImg={remoteCldImage} style={styles.profileImage} />
+          <AdvancedImage
+            cldImg={remoteCldImage}
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 104,
+              backgroundColor: "#CBD5E1",
+              borderColor: theme.primary,
+              borderWidth: 3,
+            }}
+          />
         ) : (
-          <View style={styles.profilePlaceholder} />
+          <View
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 104,
+              backgroundColor: "#CBD5E1",
+              borderColor: theme.primary,
+              borderWidth: 3,
+              alignSelf: "center",
+            }}
+          />
         )}
         <TouchableOpacity onPress={pickImage}>
-          <Text style={styles.changeText}>Change</Text>
+          <Text
+            style={{
+              color: theme.primary, // text-blue-500
+              fontWeight: "bold",
+              marginVertical: 10,
+            }}
+          >
+            Change
+          </Text>
         </TouchableOpacity>
 
         <View style={styles.inputContainer}>
@@ -184,7 +224,7 @@ export default function Profile() {
         minIndex="25%"
         maxIndex="50%"
       />
-    </>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -197,7 +237,9 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 104,
-    backgroundColor: "#CBD5E1", // bg-slate-300
+    backgroundColor: "#CBD5E1",
+    borderColor: "#ffffff",
+    borderWidth: 2,
   },
   profilePlaceholder: {
     width: 150,

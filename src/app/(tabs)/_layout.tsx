@@ -1,6 +1,7 @@
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Redirect, Tabs } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { useAuth } from "~/src/global/useAuth";
@@ -22,8 +23,13 @@ export default function Layout() {
           screenOptions={{
             tabBarShowLabel: false,
             headerTitleAlign: "center",
+            headerTintColor: theme.text,
             headerStyle: {
               elevation: 0,
+              backgroundColor: theme.background,
+            },
+            tabBarStyle: {
+              backgroundColor: theme.background,
             },
           }}
         >
@@ -35,7 +41,7 @@ export default function Layout() {
                 <MaterialCommunityIcons
                   name="home-circle"
                   size={focused ? 30 : 25}
-                  color={color}
+                  color={focused ? theme.primary : "#525252"}
                 />
               ),
             }}
@@ -48,7 +54,7 @@ export default function Layout() {
                 <FontAwesome
                   name="plus-circle"
                   size={focused ? 30 : 25}
-                  color={color}
+                  color={focused ? theme.primary : "#525252"}
                 />
               ),
             }}
@@ -61,12 +67,16 @@ export default function Layout() {
                 <FontAwesome
                   name="user-circle-o"
                   size={focused ? 28 : 23}
-                  color={color}
+                  color={focused ? theme.primary : "#525252"}
                 />
               ),
             }}
           />
         </Tabs>
+        <StatusBar
+          backgroundColor={theme.background}
+          style={theme.background === "#353535" ? "light" : "dark"}
+        />
       </NotificationProvider>
     </GestureHandlerRootView>
   );

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 
 import { KeyboardTypeOptions } from "react-native";
+import { useTheme } from "../theme/ThemeProvider";
 
 type FormField = {
   title: string;
@@ -23,7 +24,7 @@ const InputField = ({
   numberOfLines = 1,
 }: FormField) => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const theme = useTheme();
   return (
     <View
       style={{
@@ -33,7 +34,7 @@ const InputField = ({
     >
       <Text
         style={{
-          color: "black",
+          color: theme.text,
           fontSize: 18,
         }}
       >
@@ -47,8 +48,8 @@ const InputField = ({
           height: 64,
           justifyContent: "space-between",
           paddingHorizontal: 16,
-          backgroundColor: "#ffffff",
-          borderColor: "#FFC300",
+          backgroundColor: theme.background,
+          borderColor: theme.primary,
           borderWidth: 3,
           paddingVertical: 10,
           borderRadius: 10,
@@ -56,14 +57,14 @@ const InputField = ({
       >
         <TextInput
           style={{
-            color: "black",
+            color: theme.text,
             textAlignVertical: "center",
             fontSize: 18,
             height: 35,
           }}
           value={value}
           placeholder={placeholder}
-          placeholderTextColor="#7B7B8B"
+          placeholderTextColor={theme.text}
           onChangeText={handleChangeText}
           secureTextEntry={title === "Password" && !showPassword}
           keyboardType={keyboardType}

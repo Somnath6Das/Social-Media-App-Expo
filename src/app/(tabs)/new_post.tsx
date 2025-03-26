@@ -17,6 +17,7 @@ import { AuthContextType } from "~/src/types";
 import { useVideoPlayer, VideoView } from "expo-video";
 import { SafeAreaView } from "react-native-safe-area-context";
 import InputField from "~/src/components/InputField";
+import { useTheme } from "~/src/theme/ThemeProvider";
 
 export default function NewPost() {
   const router = useRouter();
@@ -24,6 +25,7 @@ export default function NewPost() {
   const [loading, setLoading] = useState(false);
   const [caption, setCaption] = useState("");
   const [media, setMedia] = useState<string | null>("");
+  const theme = useTheme();
   const [mediaType, setMediaType] = useState<
     "video" | "image" | "livePhoto" | "pairedVideo" | undefined
   >();
@@ -31,6 +33,7 @@ export default function NewPost() {
     player.loop = false;
     // player.play();
   });
+
   useEffect(() => {
     if (!media) {
       pickMedia();
@@ -74,14 +77,21 @@ export default function NewPost() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center", padding: 2 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        alignItems: "center",
+        padding: 2,
+        backgroundColor: theme.background,
+      }}
+    >
       {!media ? (
         <View
           style={{
             width: 150,
             aspectRatio: 3 / 4,
             borderRadius: 10,
-            backgroundColor: "#bababa",
+            backgroundColor: theme.content,
           }}
         />
       ) : mediaType === "image" ? (
@@ -103,7 +113,14 @@ export default function NewPost() {
         />
       )}
       <TouchableOpacity onPress={pickMedia}>
-        <Text style={{ fontWeight: "500", fontSize: 16, margin: 8 }}>
+        <Text
+          style={{
+            fontWeight: "500",
+            fontSize: 16,
+            margin: 8,
+            color: theme.text,
+          }}
+        >
           Change
         </Text>
       </TouchableOpacity>
