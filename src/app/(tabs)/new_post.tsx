@@ -129,7 +129,7 @@ export default function NewPost() {
           marginTop: "20%",
           width: "100%",
           alignItems: "center",
-          gap: 16,
+          gap: 30,
         }}
       >
         <InputField

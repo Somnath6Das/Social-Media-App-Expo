@@ -92,7 +92,7 @@ export default function Home() {
                   alignItems: "center",
                 }}
               >
-                <Text>No comments yet</Text>
+                <Text style={{ color: theme.text }}>No comments yet</Text>
               </View>
             }
             onRefresh={fetchPosts}

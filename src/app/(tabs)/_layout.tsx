@@ -23,7 +23,7 @@ export default function Layout() {
           screenOptions={{
             tabBarShowLabel: false,
             headerTitleAlign: "center",
-            headerTintColor: theme.text,
+            headerTintColor: theme.primary,
             headerStyle: {
               elevation: 0,
               backgroundColor: theme.background,

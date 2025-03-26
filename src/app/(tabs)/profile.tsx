@@ -208,15 +208,6 @@ export default function Profile() {
             onPress={updateProfile}
             loading={loading}
           />
-          <CustomButton
-            title="Sign out"
-            onPress={() => {
-              setLoading(true);
-              supabase.auth.signOut();
-              setLoading(false);
-            }}
-            loading={loading}
-          />
         </View>
       </View>
       <BottomSheetComponent
@@ -232,17 +223,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    marginTop: "10%",
   },
   inputContainer: {
     alignItems: "center",
-    gap: 10,
+    marginTop: "10%",
     width: "90%",
+    gap: 15,
   },
   buttonContainer: {
     alignItems: "center",
     marginTop: "auto",
-    marginBottom: 10,
+    marginBottom: 30,
     width: "90%",
-    gap: 8,
   },
 });
