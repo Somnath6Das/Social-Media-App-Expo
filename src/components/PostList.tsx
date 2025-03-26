@@ -125,7 +125,7 @@ export default function PostList({ post, openSheet }: any) {
           />
         )}
         <View style={{ flexDirection: "column", gap: 2 }}>
-          <Text style={{ fontSize: 16 }}>
+          <Text style={{ fontSize: 16, color: theme.text }}>
             {post.user.username || "new user"}
           </Text>
           {post.caption && (
@@ -134,7 +134,7 @@ export default function PostList({ post, openSheet }: any) {
                 style={{
                   fontWeight: "semibold",
                   fontSize: 16,
-                  color: "#605f5f",
+                  color: theme.text,
                 }}
               >
                 {post.caption}
@@ -165,7 +165,7 @@ export default function PostList({ post, openSheet }: any) {
             }}
             name={isLiked ? "heart" : "hearto"}
             size={20}
-            color={isLiked ? "crimson" : "black"}
+            color={isLiked ? "crimson" : theme.text}
           />
           <TouchableOpacity
             onPress={() => {
@@ -174,21 +174,30 @@ export default function PostList({ post, openSheet }: any) {
               openSheet();
             }}
           >
-            <Ionicons name="chatbubble-outline" size={20} />
+            <Ionicons name="chatbubble-outline" size={20} color={theme.text} />
           </TouchableOpacity>
-          <Feather name="send" size={20} />
+          <Feather name="send" size={20} color={theme.text} />
         </View>
 
-        <Feather name="bookmark" size={20} style={{ marginRight: 10 }} />
+        <Feather
+          name="bookmark"
+          size={20}
+          style={{ marginRight: 10 }}
+          color={theme.text}
+        />
       </View>
 
       <View
         style={{ flexDirection: "row", marginTop: 5, gap: 1, marginBottom: 10 }}
       >
-        <Text style={{ fontWeight: "semibold", marginLeft: 7 }}>
+        <Text
+          style={{ fontWeight: "semibold", marginLeft: 7, color: theme.text }}
+        >
           Likes {likeCountRef.current || 0}
         </Text>
-        <Text style={{ fontWeight: "semibold", marginLeft: 7 }}>
+        <Text
+          style={{ fontWeight: "semibold", marginLeft: 7, color: theme.text }}
+        >
           Comments {commentCount?.toString()}
         </Text>
       </View>

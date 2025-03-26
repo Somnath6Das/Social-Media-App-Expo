@@ -169,9 +169,10 @@ export default function Profile() {
         <TouchableOpacity onPress={pickImage}>
           <Text
             style={{
-              color: theme.primary, // text-blue-500
-              fontWeight: "bold",
+              color: theme.text, // text-blue-500
+              fontWeight: "600",
               marginVertical: 10,
+              fontSize: 16,
             }}
           >
             Change
