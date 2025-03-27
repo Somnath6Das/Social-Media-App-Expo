@@ -119,6 +119,7 @@ export default function Profile() {
     remoteCldImage = cld.image(remoteImage);
     remoteCldImage.resize(thumbnail().width(300).height(300));
   }
+
   return (
     <View style={{ flex: 1, backgroundColor: theme.background }}>
       <TouchableOpacity

@@ -13,6 +13,7 @@ import CommandInput from "~/src/components/CommentInput";
 import { useCommentStore } from "~/src/global/useComments";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "~/src/theme/ThemeProvider";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Home() {
   const isMounted = useRef(false);
@@ -90,8 +91,14 @@ export default function Home() {
                   flex: 1,
                   justifyContent: "center",
                   alignItems: "center",
+                  gap: 14,
                 }}
               >
+                <MaterialCommunityIcons
+                  name="comment"
+                  size={50}
+                  color={theme.text}
+                />
                 <Text style={{ color: theme.text }}>No comments yet</Text>
               </View>
             }

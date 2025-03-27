@@ -18,6 +18,7 @@ import { useCommentStore } from "../global/useComments";
 import { usePostId } from "../global/usePostId";
 import { fatchComments } from "../func/fetchComments";
 import { useTheme } from "../theme/ThemeProvider";
+import { router } from "expo-router";
 
 export default function PostList({ post, openSheet }: any) {
   const isMounted = useRef(false);
@@ -103,27 +104,31 @@ export default function PostList({ post, openSheet }: any) {
           marginBottom: 16,
         }}
       >
-        {post.user.avatar_url ? (
-          <AdvancedImage
-            cldImg={avatar}
-            style={{
-              width: 40,
-              height: 40,
-              aspectRatio: 1,
-              borderRadius: 50,
-            }}
-          />
-        ) : (
-          <Image
-            source={require("~/assets/photos/user.png")}
-            style={{
-              width: 40,
-              height: 40,
-              aspectRatio: 1,
-              borderRadius: 50,
-            }}
-          />
-        )}
+        <TouchableOpacity
+          onPress={() => router.push(`/profile_modal?postId=${post.id}`)}
+        >
+          {post.user.avatar_url ? (
+            <AdvancedImage
+              cldImg={avatar}
+              style={{
+                width: 40,
+                height: 40,
+                aspectRatio: 1,
+                borderRadius: 50,
+              }}
+            />
+          ) : (
+            <Image
+              source={require("~/assets/photos/user.png")}
+              style={{
+                width: 40,
+                height: 40,
+                aspectRatio: 1,
+                borderRadius: 50,
+              }}
+            />
+          )}
+        </TouchableOpacity>
         <View style={{ flexDirection: "column", gap: 2 }}>
           <Text style={{ fontSize: 16, color: theme.text }}>
             {post.user.username || "new user"}

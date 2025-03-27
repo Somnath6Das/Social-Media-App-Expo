@@ -68,6 +68,12 @@ export default function RootLayout() {
           },
         }}
       >
+        <Stack.Screen
+          name="profile_modal"
+          options={{
+            presentation: "modal",
+          }}
+        />
         <Stack.Screen name="index" />
       </Stack>
     </ThemeProvider>
