@@ -48,34 +48,34 @@ export default function RootLayout() {
   }, []);
   if (!auth.isReady) {
     return (
-      <NetworkAware>
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ActivityIndicator size="large" color="#ecaf0a" />
-        </View>
-      </NetworkAware>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#ecaf0a" />
+      </View>
     );
   }
 
   return (
-    <ThemeProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: {
-            backgroundColor: theme.background,
-          },
-        }}
-      >
-        <Stack.Screen
-          name="profile_modal"
-          options={{
-            presentation: "modal",
+    <NetworkAware>
+      <ThemeProvider>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: theme.background,
+            },
           }}
-        />
-        <Stack.Screen name="index" />
-      </Stack>
-    </ThemeProvider>
+        >
+          <Stack.Screen
+            name="profile_modal"
+            options={{
+              presentation: "transparentModal",
+              animation: "fade",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen name="index" />
+        </Stack>
+      </ThemeProvider>
+    </NetworkAware>
   );
 }

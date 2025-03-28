@@ -3,7 +3,7 @@ export const lightTheme = {
   content: "#e5e5e5",
   text: "#000000",
   primary: "#009cf5",
-  cardback: "#dcdcdd",
+  cardback: "#f1f1f1",
   cardfore: "white",
 };
 

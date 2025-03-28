@@ -33,13 +33,13 @@ const BottomSheetComponent = ({
       ref={bottomSheetRef}
       onChange={handleSheetChanges}
       enablePanDownToClose={true}
-      backgroundStyle={{ backgroundColor: theme.background }}
+      backgroundStyle={{ backgroundColor: theme.cardback }}
       handleIndicatorStyle={{ backgroundColor: theme.text }}
     >
       <BottomSheetView
         style={{
           flex: 1,
-          backgroundColor: theme.background,
+          backgroundColor: theme.cardback,
         }}
       >
         <TouchableOpacity
