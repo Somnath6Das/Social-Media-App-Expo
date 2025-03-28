@@ -7,8 +7,11 @@ import { useEffect } from "react";
 
 export default function Modal() {
   const isPresented = router.canGoBack();
-  const { postId } = useLocalSearchParams();
   const theme = useTheme();
+
+  const params = useLocalSearchParams();
+  const postId = params.postId ?? null;
+  const userId = params.userId ?? null;
 
   const getProfile = async () => {
     let { data, error } = await supabase
@@ -17,9 +20,24 @@ export default function Modal() {
       .eq("id", postId);
     console.log(JSON.stringify(data, null, 2));
   };
+
+  const getUser = async () => {
+    let { data, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId);
+    console.log(JSON.stringify(data, null, 2));
+  };
+
   useEffect(() => {
-    getProfile();
+    if (postId) {
+      getProfile();
+    }
+    if (userId) {
+      getUser();
+    }
   }, []);
+
   return (
     <View style={styles.container}>
       {isPresented && (
@@ -28,6 +46,7 @@ export default function Modal() {
         </Link>
       )}
       <Text style={{ color: theme.text }}>{postId}</Text>
+      <Text style={{ color: theme.text }}>{userId}</Text>
     </View>
   );
 }

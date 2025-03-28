@@ -1,8 +1,9 @@
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { cld } from "~/src/lib/cloudinary";
 import { AdvancedImage } from "cloudinary-react-native";
 import { useTheme } from "../theme/ThemeProvider";
+import { router } from "expo-router";
 
 export default function CommentList({ comment }: any) {
   // console.log(JSON.stringify(comment, null, 2));
@@ -21,27 +22,33 @@ export default function CommentList({ comment }: any) {
             gap: 10,
           }}
         >
-          {comment.user.avatar_url ? (
-            <AdvancedImage
-              cldImg={avatar}
-              style={{
-                width: 40,
-                height: 40,
-                aspectRatio: 1,
-                borderRadius: 50,
-              }}
-            />
-          ) : (
-            <Image
-              source={require("~/assets/photos/user.png")}
-              style={{
-                width: 40,
-                height: 40,
-                aspectRatio: 1,
-                borderRadius: 50,
-              }}
-            />
-          )}
+          <TouchableOpacity
+            onPress={() => {
+              router.push(`/profile_modal?userId=${comment.user.id}`);
+            }}
+          >
+            {comment.user.avatar_url ? (
+              <AdvancedImage
+                cldImg={avatar}
+                style={{
+                  width: 40,
+                  height: 40,
+                  aspectRatio: 1,
+                  borderRadius: 50,
+                }}
+              />
+            ) : (
+              <Image
+                source={require("~/assets/photos/user.png")}
+                style={{
+                  width: 40,
+                  height: 40,
+                  aspectRatio: 1,
+                  borderRadius: 50,
+                }}
+              />
+            )}
+          </TouchableOpacity>
           <View style={{ gap: 3 }}>
             <Text
               style={{ fontSize: 15, fontWeight: "500", color: theme.text }}
