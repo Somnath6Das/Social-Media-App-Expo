@@ -155,15 +155,15 @@ export default function Profile() {
             }}
           />
         ) : (
-          <View
+          <Image
+            source={require("~/assets/photos/user.png")}
             style={{
               width: 150,
               height: 150,
               borderRadius: 104,
-              backgroundColor: "#CBD5E1",
-              borderColor: theme.primary,
-              borderWidth: 3,
-              alignSelf: "center",
+              backgroundColor: theme.content,
+              borderColor: theme.text,
+              borderWidth: 4,
             }}
           />
         )}

@@ -23,8 +23,10 @@ export default function Home() {
     password: "",
   });
   const theme = useTheme();
+
   const [errorInfo, setErrorInfo] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const signInWithEmail = async () => {
     setLoading(true);
     const {
@@ -41,8 +43,9 @@ export default function Home() {
       user: session?.user,
       isAuthenticated: !!session?.user,
     });
-    if (!session || error)
+    if (!session || error) {
       Alert.alert("wrong credentials! Try forget password.");
+    }
     setErrorInfo(error?.status === 400);
     setLoading(false);
   };
