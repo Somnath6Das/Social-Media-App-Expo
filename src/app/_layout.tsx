@@ -48,9 +48,13 @@ export default function RootLayout() {
   }, []);
   if (!auth.isReady) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#ecaf0a" />
-      </View>
+      <NetworkAware>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" color="#ecaf0a" />
+        </View>
+      </NetworkAware>
     );
   }
 
