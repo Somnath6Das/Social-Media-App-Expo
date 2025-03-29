@@ -1,6 +1,5 @@
 import { Redirect, Stack } from "expo-router";
 import { useAuth } from "~/src/global/useAuth";
-import { StatusBar } from "expo-status-bar";
 import { useTheme } from "~/src/theme/ThemeProvider";
 import { AuthContextType } from "~/src/types";
 
@@ -23,10 +22,6 @@ export default function Layout() {
       <Stack.Screen name="verify_email" />
       <Stack.Screen name="verify_otp" />
       <Stack.Screen name="set_password" />
-      <StatusBar
-        backgroundColor={theme.background}
-        style={theme.background === "#212121" ? "light" : "dark"}
-      />
     </Stack>
   );
 }
