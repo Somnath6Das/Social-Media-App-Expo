@@ -99,6 +99,10 @@ cmake { arguments "-DANDROID_STL=c++_shared" }
 
 eas build --profile production --platform android --local
 
+// web build
+eas build --profile preview
+// web update 
+eas update --branch preview --platform android  --message "complete"
 
 // run build emulator
 npx expo run:android
