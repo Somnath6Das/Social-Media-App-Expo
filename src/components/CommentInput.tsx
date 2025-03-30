@@ -100,6 +100,7 @@ export default function CommandInput() {
         />
       )}
       <TextInput
+        style={{ color: theme.text }}
         onChangeText={onChangeText}
         placeholder="make a comment"
         value={text}
