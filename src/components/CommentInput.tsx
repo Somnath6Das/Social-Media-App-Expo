@@ -103,6 +103,7 @@ export default function CommandInput() {
         style={{ color: theme.text }}
         onChangeText={onChangeText}
         placeholder="make a comment"
+        placeholderTextColor={theme.text}
         value={text}
         keyboardType="default"
       />
