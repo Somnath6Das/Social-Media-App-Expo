@@ -21,7 +21,7 @@ export default function ColorModeSettings() {
 
   const toggleTheme = () => {
     setIsDarkTheme((prev) => !prev);
-    setTheme(isDarkTheme ? "light" : "dark");
+    isDarkTheme ? setTheme("light") : setTheme("dark");
   };
 
   return (
