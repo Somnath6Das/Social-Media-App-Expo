@@ -47,7 +47,19 @@ export default function VerifyOtp() {
             numberOfDigits={6}
             onTextChange={(text) => setOtp(text)}
             autoFocus={true}
-            theme={{ containerStyle: styles.container }}
+            theme={{
+              containerStyle: {
+                justifyContent: "center",
+                gap: 8,
+                alignItems: "center",
+                height: 10,
+                width: 10,
+                marginVertical: 40,
+              },
+              pinCodeTextStyle: { color: theme.primary },
+              focusStickStyle: { borderColor: theme.primary },
+              pinCodeContainerStyle: { backgroundColor: theme.cardback },
+            }}
           />
           <CustomButton title="Sign up" onPress={() => otpVerify()} />
         </View>
@@ -55,14 +67,3 @@ export default function VerifyOtp() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    gap: 8,
-
-    alignItems: "center",
-    height: 10,
-    width: 10,
-    marginVertical: 40,
-  },
-});
