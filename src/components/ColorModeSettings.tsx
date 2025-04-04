@@ -35,7 +35,7 @@ export default function ColorModeSettings() {
     >
       <View>
         <TouchableOpacity
-          onPress={() => setIsDarkTheme((prevValue) => !prevValue)}
+          onPress={toggleTheme}
           style={{
             flexDirection: "row",
             width: "100%",
