@@ -112,8 +112,8 @@ export default function PostList({ post, openSheet }: any) {
               <AdvancedImage
                 cldImg={avatar}
                 style={{
-                  width: 50,
-                  height: 50,
+                  width: 47,
+                  height: 47,
                   aspectRatio: 1,
                   borderRadius: 50,
                 }}
@@ -122,8 +122,8 @@ export default function PostList({ post, openSheet }: any) {
               <Image
                 source={require("~/assets/photos/user.png")}
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: 47,
+                  height: 47,
                   aspectRatio: 1,
                   borderRadius: 50,
                 }}
@@ -149,16 +149,6 @@ export default function PostList({ post, openSheet }: any) {
             )}
           </View>
         </View>
-        <TouchableOpacity
-        //ref={buttonRef} onPress={showMenu}
-        >
-          <Entypo
-            name="dots-three-horizontal"
-            size={18}
-            style={{ marginRight: 12, marginTop: 10 }}
-            color={theme.text}
-          />
-        </TouchableOpacity>
       </View>
       <PostContent post={post} />
       <View
