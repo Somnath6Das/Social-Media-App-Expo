@@ -5,7 +5,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
-import { Ionicons, Feather, AntDesign } from "@expo/vector-icons";
+import { Ionicons, Feather, AntDesign, Entypo } from "@expo/vector-icons";
 import PostContent from "./PostContent";
 import { useEffect, useRef, useState } from "react";
 import { cld } from "~/src/lib/cloudinary";
@@ -94,61 +94,72 @@ export default function PostList({ post, openSheet }: any) {
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.cardfore }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginLeft: 10,
-          marginTop: 10,
-          gap: 8,
-          marginBottom: 16,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => router.push(`/profile_modal?postId=${post.id}`)}
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginLeft: 10,
+            marginTop: 10,
+            gap: 8,
+            marginBottom: 16,
+          }}
         >
-          {post.user.avatar_url ? (
-            <AdvancedImage
-              cldImg={avatar}
-              style={{
-                width: 40,
-                height: 40,
-                aspectRatio: 1,
-                borderRadius: 50,
-              }}
-            />
-          ) : (
-            <Image
-              source={require("~/assets/photos/user.png")}
-              style={{
-                width: 40,
-                height: 40,
-                aspectRatio: 1,
-                borderRadius: 50,
-              }}
-            />
-          )}
-        </TouchableOpacity>
-        <View style={{ flexDirection: "column", gap: 2 }}>
-          <Text style={{ fontSize: 16, color: theme.text }}>
-            {post.user.username || "new user"}
-          </Text>
-          {post.caption && (
-            <View>
-              <Text
+          <TouchableOpacity
+            onPress={() => router.push(`/profile_modal?postId=${post.id}`)}
+          >
+            {post.user.avatar_url ? (
+              <AdvancedImage
+                cldImg={avatar}
                 style={{
-                  fontWeight: "semibold",
-                  fontSize: 16,
-                  color: theme.text,
+                  width: 50,
+                  height: 50,
+                  aspectRatio: 1,
+                  borderRadius: 50,
                 }}
-              >
-                {post.caption}
-              </Text>
-            </View>
-          )}
+              />
+            ) : (
+              <Image
+                source={require("~/assets/photos/user.png")}
+                style={{
+                  width: 40,
+                  height: 40,
+                  aspectRatio: 1,
+                  borderRadius: 50,
+                }}
+              />
+            )}
+          </TouchableOpacity>
+          <View style={{ flexDirection: "column", gap: 2 }}>
+            <Text style={{ fontSize: 16, color: theme.text }}>
+              {post.user.username || "new user"}
+            </Text>
+            {post.caption && (
+              <View>
+                <Text
+                  style={{
+                    fontWeight: "semibold",
+                    fontSize: 16,
+                    color: theme.text,
+                  }}
+                >
+                  {post.caption}
+                </Text>
+              </View>
+            )}
+          </View>
         </View>
+        <TouchableOpacity
+        //ref={buttonRef} onPress={showMenu}
+        >
+          <Entypo
+            name="dots-three-horizontal"
+            size={18}
+            style={{ marginRight: 12, marginTop: 10 }}
+            color={theme.text}
+          />
+        </TouchableOpacity>
       </View>
-
       <PostContent post={post} />
       <View
         style={{
