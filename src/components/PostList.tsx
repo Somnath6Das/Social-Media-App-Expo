@@ -94,62 +94,61 @@ export default function PostList({ post, openSheet }: any) {
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.cardfore }}>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginLeft: 10,
-            marginTop: 10,
-            gap: 8,
-            marginBottom: 16,
-          }}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginLeft: 10,
+          marginTop: 10,
+          gap: 8,
+          marginBottom: 16,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => router.push(`/profile_modal?postId=${post.id}`)}
         >
-          <TouchableOpacity
-            onPress={() => router.push(`/profile_modal?postId=${post.id}`)}
-          >
-            {post.user.avatar_url ? (
-              <AdvancedImage
-                cldImg={avatar}
+          {post.user.avatar_url ? (
+            <AdvancedImage
+              cldImg={avatar}
+              style={{
+                width: 47,
+                height: 47,
+                aspectRatio: 1,
+                borderRadius: 50,
+              }}
+            />
+          ) : (
+            <Image
+              source={require("~/assets/photos/user.png")}
+              style={{
+                width: 47,
+                height: 47,
+                aspectRatio: 1,
+                borderRadius: 50,
+              }}
+            />
+          )}
+        </TouchableOpacity>
+        <View style={{ flexDirection: "column", gap: 2 }}>
+          <Text style={{ fontSize: 16, color: theme.text }}>
+            {post.user.username || "new user"}
+          </Text>
+          {post.caption && (
+            <View>
+              <Text
                 style={{
-                  width: 47,
-                  height: 47,
-                  aspectRatio: 1,
-                  borderRadius: 50,
+                  fontWeight: "semibold",
+                  fontSize: 16,
+                  color: theme.text,
                 }}
-              />
-            ) : (
-              <Image
-                source={require("~/assets/photos/user.png")}
-                style={{
-                  width: 47,
-                  height: 47,
-                  aspectRatio: 1,
-                  borderRadius: 50,
-                }}
-              />
-            )}
-          </TouchableOpacity>
-          <View style={{ flexDirection: "column", gap: 2 }}>
-            <Text style={{ fontSize: 16, color: theme.text }}>
-              {post.user.username || "new user"}
-            </Text>
-            {post.caption && (
-              <View>
-                <Text
-                  style={{
-                    fontWeight: "semibold",
-                    fontSize: 16,
-                    color: theme.text,
-                  }}
-                >
-                  {post.caption}
-                </Text>
-              </View>
-            )}
-          </View>
+              >
+                {post.caption}
+              </Text>
+            </View>
+          )}
         </View>
       </View>
+
       <PostContent post={post} />
       <View
         style={{
