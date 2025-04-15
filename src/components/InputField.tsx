@@ -62,6 +62,7 @@ const InputField = ({
             textAlignVertical: "center",
             fontSize: 18,
             height: 35,
+            width: "90%",
           }}
           value={value}
           placeholder={placeholder}
