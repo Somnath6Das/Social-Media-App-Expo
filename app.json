@@ -2,7 +2,7 @@
   "expo": {
     "name": "Socialx",
     "slug": "Socialx",
-    "version": "3.0.1",
+    "version": "4.0.0",
     "scheme": "coding-ideas",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -38,7 +38,7 @@
         "projectId": "eae9761f-c9d8-4358-87da-00ddaee2ac0c"
       }
     },
-    "runtimeVersion": "3.0.1",
+    "runtimeVersion": "4.0.0",
     "updates": {
       "url": "https://u.expo.dev/eae9761f-c9d8-4358-87da-00ddaee2ac0c"
     },

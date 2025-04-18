@@ -87,18 +87,17 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.somnathdas.Socialx'
+    namespace "com.somnathdas.Socialx"
     defaultConfig {
-        applicationId 'com.somnathdas.Socialx'
+        applicationId "com.somnathdas.Socialx"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "3.0.0"
-         // Add this if not present
+        versionName "1.0"
         externalNativeBuild {
-            cmake {
-                arguments "-DANDROID_STL=c++_shared"
-            }
+        cmake { 
+            arguments "-DANDROID_STL=c++_shared"
+            } 
         }
     }
     signingConfigs {

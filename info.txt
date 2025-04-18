@@ -73,7 +73,7 @@ expo.dev > configuration > credentials > FCM V1 service account key
 android { 
 defaultConfig { 
 // Add this if not present 
-externalNativeBuild { 
+externalNativeBuild {
 cmake { arguments "-DANDROID_STL=c++_shared" } 
 } } 
 }
@@ -107,4 +107,26 @@ eas update --branch preview --platform android  --message "complete"
 // run build emulator
 npx expo run:android
 npx expo run:ios
+
+// app icon chage 
+https://www.figma.com/community/file/1155362909441341285
+
+// after prebuild app icon change.
+// remove native android and ios folder
+rm -rf ios/
+rm -rf android/
+git clean -xdf
+npx expo prebuild --clean
+// need to check package name on app level gradle
+android {
+    namespace "com.somnathdas.Socialx"
+    defaultConfig {
+        applicationId "com.somnathdas.Socialx"
+    }
+}
+// after change icon, icon background color.
+// android > app > src > main > res > values > colors.xml
+<resources>
+   <color name="iconBackground">#FFFFFF</color>
+</resources>
 
