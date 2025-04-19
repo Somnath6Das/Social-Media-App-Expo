@@ -28,10 +28,10 @@ export default function NotificationProvider({ children }: any) {
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
         //! message will get here
-        Alert.alert(
-          notification.request.content.title || "Notification",
-          notification.request.content.subtitle || "Subtitle"
-        );
+        //    Alert.alert(
+        notification.request.content.title || "Notification",
+          notification.request.content.subtitle || "Subtitle";
+        //    );
       });
 
     return () => {
