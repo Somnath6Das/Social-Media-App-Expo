@@ -68,25 +68,10 @@ project settings > service accounts > Generate new private key
 // upload this key file to
 expo.dev > configuration > credentials > FCM V1 service account key
 
-// notification icon 96px X 96px
-// create here https://convert-my-image.com/ImageConverter#google_vignette
-// inside app.json
-"expo": {
-  "notification": {
-      "icon": "./assets/icons/notification-icon.png",
-      "color": "#ffffff"
-    },
-}
 
 
-// Build error app level grade
-android { 
-defaultConfig { 
-// Add this if not present 
-externalNativeBuild {
-cmake { arguments "-DANDROID_STL=c++_shared" } 
-} } 
-}
+
+
 
 // groham bottom sheet config in babel.config.js
  return {
@@ -99,26 +84,7 @@ npm i @react-native-community/netinfo
         "com.apple.developer.networking.wifi-info": true
       },}
 
-// local apk build
-// eas.json
-"build":{
-  "production": {
-      "android": {
-        "buildType": "apk"
-      }
-    }
-}
 
-eas build --profile production --platform android --local
-
-// web build
-eas build --profile preview
-// web update 
-eas update --branch preview --platform android  --message "complete"
-
-// run build emulator
-npx expo run:android
-npx expo run:ios
 
 // app icon chage 
 https://www.figma.com/community/file/1466490409418563617
@@ -152,6 +118,16 @@ https://www.figma.com/community/file/1466490409418563617
         }
       ],]}
 
+// notification icon 96px X 96px
+// create here https://convert-my-image.com/ImageConverter#google_vignette
+// inside app.json
+"expo": {
+  "notification": {
+      "icon": "./assets/icons/notification-icon.png",
+      "color": "#ffffff"
+    },
+}
+
 // after prebuild app icon change.
 // remove native android and ios folder
 rm -rf ios/
@@ -165,6 +141,41 @@ android {
         applicationId "com.somnathdas.Socialx"
     }
 }
+
+// local apk build
+// eas.json
+"build":{
+  "production": {
+      "android": {
+        "buildType": "apk"
+      }
+    }
+}
+
+eas build --profile production --platform android --local
+
+// web build
+eas build --profile preview
+// web update 
+eas update --branch preview --platform android  --message "complete"
+
+// run build emulator
+npx expo run:android
+npx expo run:ios
+
+// Build error app level grade
+android { 
+defaultConfig { 
+// Add this if not present 
+externalNativeBuild {
+cmake { arguments "-DANDROID_STL=c++_shared" } 
+} } 
+}
+
+
+// every changes on app.json need to run prebuild
+npx expo prebuild
+
 // gradlew clean
 cd android && ./gradlew clean
 
