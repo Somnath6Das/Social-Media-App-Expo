@@ -109,7 +109,7 @@ npx expo run:android
 npx expo run:ios
 
 // app icon chage 
-https://www.figma.com/community/file/1155362909441341285
+https://www.figma.com/community/file/1466490409418563617
 
 // after prebuild app icon change.
 // remove native android and ios folder
