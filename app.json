@@ -8,6 +8,10 @@
     "icon": "./assets/icons/ios-light.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "notification": {
+      "icon": "./assets/icons/notification-icon.png",
+      "color": "#ffffff"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.somnathdas.Socialx",

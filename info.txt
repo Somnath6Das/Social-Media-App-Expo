@@ -68,6 +68,16 @@ project settings > service accounts > Generate new private key
 // upload this key file to
 expo.dev > configuration > credentials > FCM V1 service account key
 
+// notification icon 96px X 96px
+// create here https://convert-my-image.com/ImageConverter#google_vignette
+// inside app.json
+"expo": {
+  "notification": {
+      "icon": "./assets/icons/notification-icon.png",
+      "color": "#ffffff"
+    },
+}
+
 
 // Build error app level grade
 android { 
@@ -112,6 +122,35 @@ npx expo run:ios
 
 // app icon chage 
 https://www.figma.com/community/file/1466490409418563617
+
+"expo":{
+  "icon": "./assets/icons/ios-light.png",
+  "ios": {
+     "icon": {
+        "dark": "./assets/icons/ios-dark.png",
+        "light": "./assets/icons/ios-light.png",
+        "tinted": "./assets/icons/ios-tinted.png"
+      }
+  },
+   "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icons/adaptive-icon.png",
+        "monochromeImage": "./assets/icons/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+} "plugins": [[
+        "expo-splash-screen",
+        {
+          "image": "./assets/icons/splash-icon-dark.png",
+          "dark": {
+            "image": "./assets/icons/splash-icon-light.png",
+            "backgroundColor": "#000000"
+          },
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],]}
 
 // after prebuild app icon change.
 // remove native android and ios folder
