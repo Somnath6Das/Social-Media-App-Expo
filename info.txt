@@ -79,13 +79,15 @@ cmake { arguments "-DANDROID_STL=c++_shared" }
 }
 
 // groham bottom sheet config in babel.config.js
+ return {
+ plugins: ["react-native-reanimated/plugin"],}
 
- plugins: ["react-native-reanimated/plugin"],
-
- // netInfo for ios
- "entitlements": {
-      "com.apple.developer.networking.wifi-info": true
-    }
+ // netInfo for ios app.json
+npm i @react-native-community/netinfo
+"ios": {
+      "entitlements": {
+        "com.apple.developer.networking.wifi-info": true
+      },}
 
 // local apk build
 // eas.json
@@ -124,9 +126,6 @@ android {
         applicationId "com.somnathdas.Socialx"
     }
 }
-// after change icon, icon background color.
-// android > app > src > main > res > values > colors.xml
-<resources>
-   <color name="iconBackground">#FFFFFF</color>
-</resources>
+// gradlew clean
+cd android && ./gradlew clean
 
