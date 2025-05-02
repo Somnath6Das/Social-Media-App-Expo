@@ -39,6 +39,79 @@ npm i cloudinary-react-native
 // need to create a preset
 // cloudinary setting > upload > Create Preset (Unsign Preset)
 
+
+
+
+
+
+// groham bottom sheet config in babel.config.js
+ return {
+ plugins: ["react-native-reanimated/plugin"],}
+
+ // netInfo for ios app.json
+npm i @react-native-community/netinfo
+"ios": {
+      "entitlements": {
+        "com.apple.developer.networking.wifi-info": true
+      },}
+
+
+
+// app icon chage 
+https://www.figma.com/community/file/1466490409418563617
+
+
+// notification icon 96px X 96px
+// create here https://convert-my-image.com/ImageConverter#google_vignette
+// inside app.json
+"expo": {
+  "notification": {
+      "icon": "./assets/icons/notification-icon.png",
+      "color": "#ffffff"
+    },
+}
+
+
+// local apk build
+// eas.json
+"build":{
+  "production": {
+      "android": {
+        "buildType": "apk"
+      }
+    }
+}
+
+eas build --profile production --platform android --local
+
+
+
+// run build emulator
+npx expo run:android
+npx expo run:ios
+
+
+
+// gradlew clean
+cd android && ./gradlew clean
+
+// after prebuild app icon change.
+// remove native android and ios folder
+rm -rf ios/
+rm -rf android/
+git clean -xdf
+npm install
+npx expo prebuild --clean
+// need to check package name on app level gradle
+android {
+    namespace "com.somnathdas.Socialx"
+    defaultConfig {
+        applicationId "com.somnathdas.Socialx"
+    }
+}
+
+
+
 //? Push Notification
 https://docs.expo.dev/push-notifications/push-notifications-setup/
 
@@ -70,112 +143,20 @@ expo.dev > configuration > credentials > FCM V1 service account key
 
 
 
+// eas build
 
+npm install -g eas-cli
+eas login
+eas whoami
+eas init
+eas update:configure
+eas build:configure
 
-
-// groham bottom sheet config in babel.config.js
- return {
- plugins: ["react-native-reanimated/plugin"],}
-
- // netInfo for ios app.json
-npm i @react-native-community/netinfo
-"ios": {
-      "entitlements": {
-        "com.apple.developer.networking.wifi-info": true
-      },}
-
-
-
-// app icon chage 
-https://www.figma.com/community/file/1466490409418563617
-
-"expo":{
-  "icon": "./assets/icons/ios-light.png",
-  "ios": {
-     "icon": {
-        "dark": "./assets/icons/ios-dark.png",
-        "light": "./assets/icons/ios-light.png",
-        "tinted": "./assets/icons/ios-tinted.png"
-      }
-  },
-   "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/adaptive-icon.png",
-        "monochromeImage": "./assets/icons/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-} "plugins": [[
-        "expo-splash-screen",
-        {
-          "image": "./assets/icons/splash-icon-dark.png",
-          "dark": {
-            "image": "./assets/icons/splash-icon-light.png",
-            "backgroundColor": "#000000"
-          },
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ],]}
-
-// notification icon 96px X 96px
-// create here https://convert-my-image.com/ImageConverter#google_vignette
-// inside app.json
-"expo": {
-  "notification": {
-      "icon": "./assets/icons/notification-icon.png",
-      "color": "#ffffff"
-    },
-}
-
-// after prebuild app icon change.
-// remove native android and ios folder
-rm -rf ios/
-rm -rf android/
-git clean -xdf
-npx expo prebuild --clean
-// need to check package name on app level gradle
-android {
-    namespace "com.somnathdas.Socialx"
-    defaultConfig {
-        applicationId "com.somnathdas.Socialx"
-    }
-}
-
-// local apk build
-// eas.json
-"build":{
-  "production": {
-      "android": {
-        "buildType": "apk"
-      }
-    }
-}
-
-eas build --profile production --platform android --local
+// every changes on app.json need to run prebuild 
+// get package name
+npx expo prebuild
 
 // web build
 eas build --profile preview
 // web update 
 eas update --branch preview --platform android  --message "complete"
-
-// run build emulator
-npx expo run:android
-npx expo run:ios
-
-// Build error app level grade
-android { 
-defaultConfig { 
-// Add this if not present 
-externalNativeBuild {
-cmake { arguments "-DANDROID_STL=c++_shared" } 
-} } 
-}
-
-
-// every changes on app.json need to run prebuild
-npx expo prebuild
-
-// gradlew clean
-cd android && ./gradlew clean
-
